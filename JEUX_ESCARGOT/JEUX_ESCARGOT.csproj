@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ressource\img\escargot-droit.png" />
+    <None Remove="ressource\img\escargot-gauche.png" />
+    <None Remove="ressource\img\grenouille_droite.png" />
+    <None Remove="ressource\img\grenouille_gauche.png" />
+    <None Remove="ressource\img\lezard.png" />
+    <None Remove="ressource\img\oiseau.png" />
+    <None Remove="ressource\img\route.png" />
+    <None Remove="ressource\img\salade1bg.png" />
+    <None Remove="ressource\img\salade2bg.png" />
+    <None Remove="ressource\img\salade3bg.png" />
+    <None Remove="ressource\img\salade4bg.png" />
+    <None Remove="ressource\img\salade5bg.png" />
+    <None Remove="ressource\img\salade6bg.png" />
+    <None Remove="ressource\img\souris.png" />
+    <None Remove="ressource\img\voiture1.png" />
+    <None Remove="ressource\img\voiture2.png" />
+    <None Remove="ressource\img\voiture3.png" />
+    <None Remove="ressource\son\test.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ressource\img\escargot-droit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\escargot-gauche.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\grenouille_droite.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\grenouille_gauche.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\lezard.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\oiseau.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\route.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\salade1bg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\salade2bg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\salade3bg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\salade4bg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\salade5bg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\salade6bg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\souris.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\voiture1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\voiture2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\voiture3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\son\test.wav">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
