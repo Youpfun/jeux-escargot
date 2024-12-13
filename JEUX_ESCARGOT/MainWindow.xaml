@@ -65,6 +65,11 @@
                 VerticalAlignment="Center"
                 Source="/ressource/img/salade3bg.png"
                 Stretch="Fill" />
+            <Image
+                x:Name="voitureGauche"
+                Margin="277,-807,720,885"
+                Source="/ressource/img/voiture3Retournee.png"
+                Stretch="Fill" />
             <Border
                 x:Name="route"
                 Canvas.Left="247"

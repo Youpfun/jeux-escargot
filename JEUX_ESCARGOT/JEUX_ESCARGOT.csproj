@@ -24,8 +24,10 @@
     <None Remove="ressource\img\salade6bg.png" />
     <None Remove="ressource\img\souris.png" />
     <None Remove="ressource\img\voiture1.png" />
+    <None Remove="ressource\img\voiture1Retournee.png" />
     <None Remove="ressource\img\voiture2.png" />
     <None Remove="ressource\img\voiture3.png" />
+    <None Remove="ressource\img\voiture3Retournee.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,10 +76,16 @@
     <Resource Include="ressource\img\voiture1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="ressource\img\voiture1Retournee.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="ressource\img\voiture2.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\voiture3.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\voiture3Retournee.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
