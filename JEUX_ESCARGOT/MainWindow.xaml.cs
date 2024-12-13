@@ -272,7 +272,7 @@ namespace JEUX_ESCARGOT
         private void RespawnVoiture()
         {
             Canvas.SetTop(voiture, this.ActualHeight + voiture.ActualHeight);
-            Canvas.SetLeft(voiture, rnd.Next((int)(this.ActualWidth - this.ActualHeight / 2), (int)(this.ActualWidth-voiture.ActualWidth)));
+            //Canvas.SetLeft(voiture, (int)(this.ActualWidth - (this.ActualWidth / 2)+30));
             voiture.Source = tabVoitures[rndVoiture.Next(0, 2)];
         }
         private void BasculerMenuPause()
