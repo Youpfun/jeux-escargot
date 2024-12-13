@@ -14,15 +14,14 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="905*" />
-            <ColumnDefinition Width="412*" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Canvas Name="myCanvas" Grid.ColumnSpan="2">
+        <Canvas Name="myCanvas">
             <Canvas.Background>
                 <ImageBrush ImageSource="/ressource/img/route.png" Stretch="Fill" />
             </Canvas.Background>
             <Label
-                x:Name="point"
+                x:Name="points"
                 Canvas.Left="43"
                 Canvas.Top="14"
                 Width="24"
@@ -43,19 +42,24 @@
                 VerticalAlignment="Top"
                 Source="/ressource/img/escargot-droit.png"
                 Stretch="Fill" />
-            <Image
+            <Image x:Name="voiture"
                 Canvas.Left="736"
                 Canvas.Top="99"
                 Width="260"
                 Height="520"
                 Source="/ressource/img/voiture1.png"
                 Stretch="Fill" />
+            <Image
+                x:Name="imageSaladeGauche"
+                Canvas.Left="381"
+                Canvas.Top="-159"
+                Source="/ressource/img/salade1bg.png"
+                Stretch="Fill" />
         </Canvas>
 
         <!--  Menu de pause  -->
         <Grid
             x:Name="PauseMenu"
-            Grid.ColumnSpan="2"
             Background="#80000000"
             Visibility="Collapsed">
             <Border
@@ -96,10 +100,5 @@
                 </StackPanel>
             </Border>
         </Grid>
-        <Image
-            x:Name="imageSaladeGauche"
-            Margin="381,-157,426,725"
-            Source="/ressource/img/salade1bg.png"
-            Stretch="Fill" />
     </Grid>
 </Window>

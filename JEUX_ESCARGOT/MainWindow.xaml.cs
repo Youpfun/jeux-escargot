@@ -23,18 +23,39 @@ namespace JEUX_ESCARGOT
         private static BitmapImage escargotGauche;
         private static BitmapImage escargotDroit;
         private static DispatcherTimer minuterie;
+        private DispatcherTimer saladeTimer;
+        private bool saladeEnAttente = false;
         private static Random rnd = new Random();
+        private static Random rndSalade = new Random();
         private static bool gauche, droite, haut, bas;
         private static SoundPlayer sonDeFond;
-        private static readonly int VITESSE_SALADE = 10;
-        int score = 0;
+        private static readonly int VITESSE_SALADE = 5;
+        int score = 0, barreDeVie = 3;
+        System.Windows.Media.ImageSource[] tabSalades = [new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade1bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade2bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade3bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade4bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade5bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade6bg.png"))];
         public MainWindow()
         {
             InitializeComponent();
             InitBitmaps();
             InitTimer();
             SonDeFond();
+            InitSaladeTimer();
         }
+        private void InitSaladeTimer()
+        {
+            saladeTimer = new DispatcherTimer();
+            saladeTimer.Interval = TimeSpan.FromSeconds(5);
+            saladeTimer.Tick += ReprendreDescente;
+        }
+
+        private void ReprendreDescente(object? sender, EventArgs e)
+        {
+            // Arrêter le timer
+            saladeTimer.Stop();
+
+            // Reprendre la descente
+            saladeEnAttente = false;
+        }
+
         private void InitBitmaps()
         {
             escargotDroit = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-droit.png"));
@@ -120,6 +141,42 @@ namespace JEUX_ESCARGOT
             Random alea = new Random();
             Canvas.SetTop(imageSaladeGauche, Canvas.GetTop(imageSaladeGauche) + VITESSE_SALADE);
 
+            var saladeRect = new System.Drawing.Rectangle(
+            (int)Canvas.GetLeft(imageSaladeGauche),
+            (int)Canvas.GetTop(imageSaladeGauche),
+            (int)imageSaladeGauche.ActualWidth,
+            (int)imageSaladeGauche.ActualHeight);
+
+            var voitureRect = new System.Drawing.Rectangle(
+            (int)Canvas.GetLeft(voiture),
+            (int)Canvas.GetTop(voiture),
+            (int)voiture.ActualWidth,
+            (int)voiture.ActualHeight);
+
+            var escargotRect = new System.Drawing.Rectangle(
+            (int)Canvas.GetLeft(escargot),
+            (int)Canvas.GetTop(escargot),
+            (int)escargot.ActualWidth,
+            (int)escargot.ActualHeight);
+
+            var saladeGaucheRect = new System.Drawing.Rectangle(
+            (int)Canvas.GetLeft(imageSaladeGauche),
+            (int)Canvas.GetTop(imageSaladeGauche),
+            (int)imageSaladeGauche.ActualWidth,
+            (int)imageSaladeGauche.ActualHeight);
+
+            if (voitureRect.IntersectsWith(escargotRect))
+            {
+                barreDeVie--;
+                Canvas.SetLeft(escargot, 0);
+            }
+
+            if (saladeGaucheRect.IntersectsWith(escargotRect))
+            {
+                score++;
+                Canvas.SetTop(imageSaladeGauche, 0 - imageSaladeGauche.ActualHeight);
+            }
+
             if (gauche)
             {
                 escargot.Source = escargotGauche;
@@ -146,11 +203,25 @@ namespace JEUX_ESCARGOT
                 if (Canvas.GetTop(escargot) < 0)
                     Canvas.SetTop(escargot, 0);
             }
-            var saladeRect = new System.Drawing.Rectangle(
-            (int)Canvas.GetLeft(imageSaladeGauche),
-            (int)Canvas.GetTop(imageSaladeGauche),
-            (int)imageSaladeGauche.ActualWidth,
-            (int)imageSaladeGauche.ActualHeight);
+            if (!saladeEnAttente)
+            {
+                Canvas.SetTop(imageSaladeGauche, Canvas.GetTop(imageSaladeGauche) + VITESSE_SALADE);
+
+                // Vérifier si la salade est sortie de l'écran
+                if (Canvas.GetTop(imageSaladeGauche) > this.ActualHeight)
+                {
+                    // Mettre en pause la descente
+                    saladeEnAttente = true;
+
+                    // Positionner la salade au-dessus de l'écran
+                    Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
+                    Canvas.SetLeft(imageSaladeGauche, rnd.Next(0, (int)this.ActualWidth - (int)imageSaladeGauche.ActualWidth));
+                    imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
+
+                    // Démarrer le timer de pause
+                    saladeTimer.Start();
+                }
+            }
         }
         private void BasculerMenuPause()
         {
