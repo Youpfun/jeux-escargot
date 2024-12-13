@@ -24,14 +24,19 @@ namespace JEUX_ESCARGOT
         private static BitmapImage escargotDroit;
         private static DispatcherTimer minuterie;
         private DispatcherTimer saladeTimer;
+        private DispatcherTimer voitureTimer;
         private bool saladeEnAttente = false;
+        private bool voitureEnAttente = false;
         private static Random rnd = new Random();
         private static Random rndSalade = new Random();
+        private static Random rndVoiture = new Random();
         private static bool gauche, droite, haut, bas;
         private static SoundPlayer sonDeFond;
         private static readonly int VITESSE_SALADE = 5;
+        private static readonly int VITESSE_VOITURE = 7;
         int score = 0, barreDeVie = 3;
         System.Windows.Media.ImageSource[] tabSalades = [new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade1bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade2bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade3bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade4bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade5bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade6bg.png"))];
+        System.Windows.Media.ImageSource[] tabVoitures = [new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3.png"))];
         public MainWindow()
         {
             InitializeComponent();
@@ -39,12 +44,19 @@ namespace JEUX_ESCARGOT
             InitTimer();
             SonDeFond();
             InitSaladeTimer();
+            InitVoitureTimer();
         }
         private void InitSaladeTimer()
         {
             saladeTimer = new DispatcherTimer();
             saladeTimer.Interval = TimeSpan.FromSeconds(5);
             saladeTimer.Tick += ReprendreDescente;
+        }
+        private void InitVoitureTimer()
+        {
+            voitureTimer = new DispatcherTimer();
+            voitureTimer.Interval = TimeSpan.FromSeconds(8);
+            voitureTimer.Tick += ReprendreDescenteVoiture;
         }
 
         private void ReprendreDescente(object? sender, EventArgs e)
@@ -54,6 +66,12 @@ namespace JEUX_ESCARGOT
 
             // Reprendre la descente
             saladeEnAttente = false;
+        }
+
+        private void ReprendreDescenteVoiture(object? sender, EventArgs e)
+        {
+            voitureTimer.Stop();
+            voitureEnAttente = false;
         }
 
         private void InitBitmaps()
@@ -222,12 +240,39 @@ namespace JEUX_ESCARGOT
                     saladeTimer.Start();
                 }
             }
+
+            if (!voitureEnAttente)
+            {
+                Canvas.SetTop(voiture, Canvas.GetTop(voiture) - VITESSE_VOITURE);
+
+                // Vérifier si la voiture est sortie de l'écran
+                if (Canvas.GetTop(voiture) < 0-voiture.ActualHeight)
+                {
+                    // Mettre en pause la descente
+                    voitureEnAttente = true;
+
+                    // Positionner la voiture au-dessus de l'écran
+                    RespawnVoiture();
+
+                    // Démarrer le timer de pause UNIQUEMENT s'il n'est pas déjà en cours
+                    if (!voitureTimer.IsEnabled)
+                    {
+                        voitureTimer.Start();
+                    }
+                }
+            }
         }
         private void RespawnSalad()
         {
             Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
             Canvas.SetLeft(imageSaladeGauche, rnd.Next(0, (int)this.ActualWidth - (int)imageSaladeGauche.ActualWidth));
             imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
+        }
+        private void RespawnVoiture()
+        {
+            Canvas.SetTop(voiture, this.ActualHeight + voiture.ActualHeight);
+            Canvas.SetLeft(voiture, rnd.Next(0, (int)this.ActualWidth - (int)voiture.ActualWidth));
+            voiture.Source = tabVoitures[rndVoiture.Next(0, 1)];
         }
         private void BasculerMenuPause()
         {
