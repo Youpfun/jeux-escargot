@@ -26,7 +26,6 @@
     <None Remove="ressource\img\voiture1.png" />
     <None Remove="ressource\img\voiture2.png" />
     <None Remove="ressource\img\voiture3.png" />
-    <None Remove="ressource\son\test.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,9 +80,16 @@
     <Resource Include="ressource\img\voiture3.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="ressource\son\test.wav">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ressource\son\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ressource\son\test.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

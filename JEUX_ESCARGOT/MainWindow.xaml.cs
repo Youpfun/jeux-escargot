@@ -32,7 +32,7 @@ namespace JEUX_ESCARGOT
         private static Random rndSalade = new Random();
         private static Random rndVoiture = new Random();
         private static bool gauche, droite, haut, bas;
-        private static SoundPlayer sonDeFond;
+        private static MediaPlayer sonDeFond;
         private static readonly int VITESSE_SALADE = 5;
         private static readonly int VITESSE_VOITURE = 7;
         int score = 0, barreDeVie = 3;
@@ -43,7 +43,7 @@ namespace JEUX_ESCARGOT
             InitializeComponent();
             InitBitmaps();
             InitTimer();
-            SonDeFond();
+            InitMusique();
             InitSaladeTimer();
             InitVoitureTimer();
         }
@@ -88,14 +88,19 @@ namespace JEUX_ESCARGOT
             minuterie.Tick += Jeu;
             minuterie.Start();
         }
-        private void SonDeFond()
+        public static void InitMusique()
         {
-            sonDeFond = new SoundPlayer(Application.GetResourceStream(
-            new Uri("pack://application:,,,/JEUX_ESCARGOT;component/ressource/son/test.wav")).Stream);
+            sonDeFond = new MediaPlayer();
+            sonDeFond.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/ressource/son/test.mp3"));
+            sonDeFond.MediaEnded += RelanceMusique;
+            sonDeFond.Volume = 1;
+            sonDeFond.Play();
+        }
 
-            // Lire le fichier en arrière-plan (asynchrone)
-            sonDeFond.PlayLooping();  // Pour lire en boucle
-                                      // player.Play();      // Pour lire une seule fois
+        private static void RelanceMusique(object? sender, EventArgs e)
+        {
+            sonDeFond.Position = TimeSpan.Zero;
+            sonDeFond.Play();
         }
 
         //private void initCadeau()
@@ -209,14 +214,14 @@ namespace JEUX_ESCARGOT
             {
                 escargot.Source = escargotDroit;
                 Canvas.SetLeft(escargot, Canvas.GetLeft(escargot) + PAS_ESCARGOT);
-                if (Canvas.GetLeft(escargot) > this.ActualWidth - escargot.Width)
-                    Canvas.SetLeft(escargot, this.ActualWidth - escargot.Width);
+                if (Canvas.GetLeft(escargot) > this.ActualWidth - escargotRect.Width)
+                    Canvas.SetLeft(escargot, this.ActualWidth - escargotRect.Width);
             }
             if (bas)
             {
                 Canvas.SetTop(escargot, Canvas.GetTop(escargot) + PAS_ESCARGOT);
-                if (Canvas.GetTop(escargot) > this.ActualHeight - escargot.Height)
-                    Canvas.SetTop(escargot, this.ActualHeight - escargot.Height);
+                if (Canvas.GetTop(escargot) > this.ActualHeight - escargotRect.Height + PAS_ESCARGOT)
+                    Canvas.SetTop(escargot, this.ActualHeight - escargotRect.Height + PAS_ESCARGOT);
             }
             if (haut)
             {
