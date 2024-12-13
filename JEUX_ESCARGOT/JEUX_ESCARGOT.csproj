@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="ressource\img\coeur.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="ressource\img\escargot-droit.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -99,6 +99,9 @@ namespace JEUX_ESCARGOT
             escargotDroit = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-droit.png"));
             escargotGauche = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-gauche.png"));
             escargot.Source = escargotDroit;
+            //vie1 = new BitmapImage(new Uri("pack://application:,,,/ressource/img/vie1.png"));
+            //vie2 = new BitmapImage(new Uri("pack://application:,,,/ressource/img/vie2.png"));
+            //vie3 = new BitmapImage(new Uri("pack://application:,,,/ressource/img/vie3.png"));
         }
         private void InitTimer()
         {
@@ -219,6 +222,24 @@ namespace JEUX_ESCARGOT
             {
                 barreDeVie--;
                 Canvas.SetLeft(escargot, 0);
+                for (int i = 0; i < 3; i++)
+                {
+                    if (barreDeVie == 2)
+                    {
+                        vie3.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                    else if (barreDeVie == 1)
+                    {
+                        vie2.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                    else //(barreDeVie == 0)
+                    {
+                        MessageBox.Show("Game Over");
+                        this.Close();
+                    }
+                }
+                //MonImage.Visibility = System.Windows.Visibility.Visible; //pour afficher l'image
+
             }
 
             if (saladeGaucheRect.IntersectsWith(escargotRect))

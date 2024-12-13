@@ -99,6 +99,9 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 BorderThickness="1" />
+            <Image x:Name="vie1" Height="34" Canvas.Left="8" Source="/ressource/img/coeur.png" Stretch="Fill" Canvas.Top="57" Width="36"/>
+            <Image x:Name="vie2" Height="34" Canvas.Left="34" Source="/ressource/img/coeur.png" Stretch="Fill" Canvas.Top="57" Width="36"/>
+            <Image x:Name="vie3" Height="34" Canvas.Left="60" Source="/ressource/img/coeur.png" Stretch="Fill" Canvas.Top="57" Width="36"/>
         </Canvas>
 
         <!--  Menu de pause  -->
