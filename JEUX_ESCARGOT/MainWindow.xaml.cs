@@ -297,7 +297,7 @@ namespace JEUX_ESCARGOT
                 Canvas.SetTop(voitureGauche, (Canvas.GetTop(voitureGauche) + VITESSE_VOITURE));
 
                 // Vérifier si la voiture est sortie de l'écran
-                if (Canvas.GetTop(voitureGauche) > this.ActualHeight+voitureGauche.ActualHeight)
+                if (Canvas.GetTop(voitureGauche) > this.ActualHeight + voitureGauche.ActualHeight)
                 {
                     // Mettre en pause la descente
                     voitureGaucheEnAttente = true;
@@ -327,9 +327,9 @@ namespace JEUX_ESCARGOT
         }
         private void RespawnVoitureGauche()
         {
-            Canvas.SetTop(voiture, 0 - voiture.ActualHeight);
+            Canvas.SetTop(voitureGauche, 0 - voitureGauche.ActualHeight);
             //Canvas.SetLeft(voiture, (int)(this.ActualWidth - (this.ActualWidth / 2)+30));
-            voiture.Source = tabVoituresGauche[rndVoitureGauche.Next(0, 2)];
+            voitureGauche.Source = tabVoituresGauche[rndVoitureGauche.Next(0, 2)];
         }
 
         private void BasculerMenuPause()
