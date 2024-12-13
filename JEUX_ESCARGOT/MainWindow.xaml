@@ -21,10 +21,10 @@
                 <ImageBrush ImageSource="/ressource/img/route.png" Stretch="Fill" />
             </Canvas.Background>
             <Label
-                x:Name="points"
+                x:Name="l_score"
                 Canvas.Left="43"
-                Canvas.Top="14"
-                Width="24"
+                Canvas.Top="18"
+                Width="39"
                 Height="28"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
@@ -42,7 +42,8 @@
                 VerticalAlignment="Top"
                 Source="/ressource/img/escargot-droit.png"
                 Stretch="Fill" />
-            <Image x:Name="voiture"
+            <Image
+                x:Name="voiture"
                 Canvas.Left="736"
                 Canvas.Top="99"
                 Width="260"
@@ -55,6 +56,7 @@
                 Canvas.Top="-159"
                 Source="/ressource/img/salade1bg.png"
                 Stretch="Fill" />
+            <Image Height="36" Canvas.Left="15" Source="/ressource/img/salade3bg.png" Stretch="Fill" Canvas.Top="14" Width="23" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Canvas>
 
         <!--  Menu de pause  -->

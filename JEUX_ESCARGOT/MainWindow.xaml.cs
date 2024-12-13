@@ -138,6 +138,7 @@ namespace JEUX_ESCARGOT
         }
         private void Jeu(object? sender, EventArgs e)
         {
+            l_score.Content = score;
             Random alea = new Random();
             Canvas.SetTop(imageSaladeGauche, Canvas.GetTop(imageSaladeGauche) + VITESSE_SALADE);
 
@@ -175,6 +176,7 @@ namespace JEUX_ESCARGOT
             {
                 score++;
                 Canvas.SetTop(imageSaladeGauche, 0 - imageSaladeGauche.ActualHeight);
+                RespawnSalad();
             }
 
             if (gauche)
@@ -214,14 +216,18 @@ namespace JEUX_ESCARGOT
                     saladeEnAttente = true;
 
                     // Positionner la salade au-dessus de l'écran
-                    Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
-                    Canvas.SetLeft(imageSaladeGauche, rnd.Next(0, (int)this.ActualWidth - (int)imageSaladeGauche.ActualWidth));
-                    imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
+                    RespawnSalad();
 
                     // Démarrer le timer de pause
                     saladeTimer.Start();
                 }
             }
+        }
+        private void RespawnSalad()
+        {
+            Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
+            Canvas.SetLeft(imageSaladeGauche, rnd.Next(0, (int)this.ActualWidth - (int)imageSaladeGauche.ActualWidth));
+            imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
         }
         private void BasculerMenuPause()
         {
