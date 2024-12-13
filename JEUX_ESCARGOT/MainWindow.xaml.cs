@@ -50,13 +50,13 @@ namespace JEUX_ESCARGOT
         private void InitSaladeTimer()
         {
             saladeTimer = new DispatcherTimer();
-            saladeTimer.Interval = TimeSpan.FromSeconds(5);
+            saladeTimer.Interval = TimeSpan.FromSeconds(3);
             saladeTimer.Tick += ReprendreDescente;
         }
         private void InitVoitureTimer()
         {
             voitureTimer = new DispatcherTimer();
-            voitureTimer.Interval = TimeSpan.FromSeconds(8);
+            voitureTimer.Interval = TimeSpan.FromSeconds(5);
             voitureTimer.Tick += ReprendreDescenteVoiture;
         }
 
@@ -272,8 +272,8 @@ namespace JEUX_ESCARGOT
         private void RespawnVoiture()
         {
             Canvas.SetTop(voiture, this.ActualHeight + voiture.ActualHeight);
-            Canvas.SetLeft(voiture, rnd.Next(0, (int)this.ActualWidth - (int)voiture.ActualWidth));
-            voiture.Source = tabVoitures[rndVoiture.Next(0, 1)];
+            Canvas.SetLeft(voiture, rnd.Next((int)(this.ActualWidth - this.ActualHeight / 2), (int)(this.ActualWidth-voiture.ActualWidth)));
+            voiture.Source = tabVoitures[rndVoiture.Next(0, 2)];
         }
         private void BasculerMenuPause()
         {
