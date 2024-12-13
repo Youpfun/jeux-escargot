@@ -56,7 +56,38 @@
                 Canvas.Top="-159"
                 Source="/ressource/img/salade1bg.png"
                 Stretch="Fill" />
-            <Image Height="36" Canvas.Left="15" Source="/ressource/img/salade3bg.png" Stretch="Fill" Canvas.Top="14" Width="23" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Image
+                Canvas.Left="15"
+                Canvas.Top="14"
+                Width="23"
+                Height="36"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Source="/ressource/img/salade3bg.png"
+                Stretch="Fill" />
+            <Border
+                x:Name="route"
+                Canvas.Left="247"
+                Width="820"
+                Height="718"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                BorderThickness="1" />
+            <Border
+                x:Name="herbeGauche"
+                Width="247"
+                Height="718"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                BorderThickness="1" />
+            <Border
+                x:Name="herbeDroit"
+                Width="250"
+                Height="718"
+                Margin="1067,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                BorderThickness="1" />
         </Canvas>
 
         <!--  Menu de pause  -->

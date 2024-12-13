@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Drawing;
+using System.Data;
 
 namespace JEUX_ESCARGOT
 {
@@ -265,7 +266,7 @@ namespace JEUX_ESCARGOT
         private void RespawnSalad()
         {
             Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
-            Canvas.SetLeft(imageSaladeGauche, rnd.Next(0, (int)this.ActualWidth - (int)imageSaladeGauche.ActualWidth));
+            Canvas.SetLeft(imageSaladeGauche, rnd.Next((int)Canvas.GetLeft(route), (int)(Canvas.GetLeft(route) + route.ActualWidth - imageSaladeGauche.ActualHeight)));
             imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
         }
         private void RespawnVoiture()
