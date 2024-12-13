@@ -63,13 +63,13 @@ namespace JEUX_ESCARGOT
         private void InitVoitureTimer()
         {
             voitureTimer = new DispatcherTimer();
-            voitureTimer.Interval = TimeSpan.FromSeconds(5);
+            voitureTimer.Interval = TimeSpan.FromSeconds(rnd.Next(0,5));
             voitureTimer.Tick += ReprendreDescenteVoiture;
         }
         private void InitVoitureGaucheTimer()
         {
             voitureGaucheTimer = new DispatcherTimer();
-            voitureGaucheTimer.Interval = TimeSpan.FromSeconds(6);
+            voitureGaucheTimer.Interval = TimeSpan.FromSeconds(rnd.Next(0,5));
             voitureGaucheTimer.Tick += ReprendreDescenteVoitureGauche;
         }
 

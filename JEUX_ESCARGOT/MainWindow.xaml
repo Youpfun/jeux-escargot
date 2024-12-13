@@ -48,12 +48,14 @@
                 Canvas.Top="750"
                 Width="260"
                 Height="520"
+                Panel.ZIndex="2"
                 Source="/ressource/img/voiture1.png"
                 Stretch="Fill" />
             <Image
                 x:Name="imageSaladeGauche"
                 Canvas.Left="381"
                 Canvas.Top="-159"
+                Panel.ZIndex="1"
                 Source="/ressource/img/salade1bg.png"
                 Stretch="Fill" />
             <Image
@@ -71,6 +73,7 @@
                 Canvas.Top="-800"
                 Width="278"
                 Height="600"
+                Panel.ZIndex="2"
                 Source="/ressource/img/voiture3Retournee.png"
                 Stretch="Fill" />
             <Border
