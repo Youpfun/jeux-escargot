@@ -222,21 +222,18 @@ namespace JEUX_ESCARGOT
             {
                 barreDeVie--;
                 Canvas.SetLeft(escargot, 0);
-                for (int i = 0; i < 3; i++)
+                if (barreDeVie == 2)
                 {
-                    if (barreDeVie == 2)
-                    {
-                        vie3.Visibility = System.Windows.Visibility.Collapsed;
-                    }
-                    else if (barreDeVie == 1)
-                    {
-                        vie2.Visibility = System.Windows.Visibility.Collapsed;
-                    }
-                    else //(barreDeVie == 0)
-                    {
-                        MessageBox.Show("Game Over");
-                        this.Close();
-                    }
+                    vie3.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else if (barreDeVie == 1)
+                {
+                    vie2.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else //(barreDeVie == 0)
+                {
+                    MessageBox.Show("Game Over");
+                    this.Close();
                 }
                 //MonImage.Visibility = System.Windows.Visibility.Visible; //pour afficher l'image
 
