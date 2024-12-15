@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="ressource\img\escargot-droit.png" />
     <None Remove="ressource\img\escargot-gauche.png" />
+    <None Remove="ressource\img\famille_escargot.png" />
     <None Remove="ressource\img\grenouille_droite.png" />
     <None Remove="ressource\img\grenouille_gauche.png" />
     <None Remove="ressource\img\lezard.png" />
@@ -38,6 +39,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\escargot-gauche.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\famille_escargot.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\gp_escargot.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\grenouille_droite.png">

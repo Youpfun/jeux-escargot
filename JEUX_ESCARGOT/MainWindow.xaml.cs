@@ -27,6 +27,8 @@ namespace JEUX_ESCARGOT
         private DispatcherTimer saladeTimer;
         private DispatcherTimer voitureTimer;
         private DispatcherTimer voitureGaucheTimer;
+        private DispatcherTimer vieFamilleTimer;
+        private DispatcherTimer vieGrandParentsTimer;
         private bool saladeEnAttente = false;
         private bool voitureEnAttente = false;
         private bool voitureGaucheEnAttente = false;
@@ -39,10 +41,27 @@ namespace JEUX_ESCARGOT
         private static readonly int VITESSE_SALADE = 5;
         private static readonly int VITESSE_VOITURE = 7;
         int score = 0, barreDeVie = 3;
-        System.Windows.Media.ImageSource[] tabSalades = [new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade1bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade2bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade3bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade4bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade5bg.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade6bg.png"))];
-        System.Windows.Media.ImageSource[] tabVoitures = [new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3.png"))];
-        System.Windows.Media.ImageSource[] tabVoituresGauche = [new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1Retournee.png")), new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3Retournee.png"))];
-
+        int vieFamille = 5;
+        int vieGrandParents = 5;
+        System.Windows.Media.ImageSource[] tabSalades = new System.Windows.Media.ImageSource[]
+        {
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade1bg.png")),
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade2bg.png")),
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade3bg.png")),
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade4bg.png")),
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade5bg.png")),
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade6bg.png"))
+        };
+        System.Windows.Media.ImageSource[] tabVoitures = new System.Windows.Media.ImageSource[]
+        {
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1.png")),
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3.png"))
+        };
+        System.Windows.Media.ImageSource[] tabVoituresGauche = new System.Windows.Media.ImageSource[]
+        {
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1Retournee.png")),
+            new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3Retournee.png"))
+        };
 
         public MainWindow()
         {
@@ -53,24 +72,59 @@ namespace JEUX_ESCARGOT
             InitSaladeTimer();
             InitVoitureTimer();
             InitVoitureGaucheTimer();
+            InitVieFamilleTimer();
+            InitVieGrandParentsTimer();
+            InitVieFamille();
+            InitVieGrandParents();
         }
+
         private void InitSaladeTimer()
         {
             saladeTimer = new DispatcherTimer();
             saladeTimer.Interval = TimeSpan.FromSeconds(3);
             saladeTimer.Tick += ReprendreDescente;
         }
+
         private void InitVoitureTimer()
         {
             voitureTimer = new DispatcherTimer();
-            voitureTimer.Interval = TimeSpan.FromSeconds(rnd.Next(0,5));
+            voitureTimer.Interval = TimeSpan.FromSeconds(rnd.Next(0, 5));
             voitureTimer.Tick += ReprendreDescenteVoiture;
         }
+
         private void InitVoitureGaucheTimer()
         {
             voitureGaucheTimer = new DispatcherTimer();
-            voitureGaucheTimer.Interval = TimeSpan.FromSeconds(rnd.Next(0,5));
+            voitureGaucheTimer.Interval = TimeSpan.FromSeconds(rnd.Next(0, 5));
             voitureGaucheTimer.Tick += ReprendreDescenteVoitureGauche;
+        }
+
+        private void InitVieFamilleTimer()
+        {
+            vieFamilleTimer = new DispatcherTimer();
+            vieFamilleTimer.Interval = TimeSpan.FromSeconds(5);
+            vieFamilleTimer.Tick += DiminuerVieFamille;
+            vieFamilleTimer.Start();
+        }
+
+        private void InitVieGrandParentsTimer()
+        {
+            vieGrandParentsTimer = new DispatcherTimer();
+            vieGrandParentsTimer.Interval = TimeSpan.FromSeconds(5);
+            vieGrandParentsTimer.Tick += DiminuerVieGrandParents;
+            vieGrandParentsTimer.Start();
+        }
+
+        private void InitVieFamille()
+        {
+            vieFamille = 5;
+            pbFamille.Value = vieFamille;
+        }
+
+        private void InitVieGrandParents()
+        {
+            vieGrandParents = 5;
+            pbGrandParents.Value = vieGrandParents;
         }
 
         private void ReprendreDescente(object? sender, EventArgs e)
@@ -99,10 +153,8 @@ namespace JEUX_ESCARGOT
             escargotDroit = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-droit.png"));
             escargotGauche = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-gauche.png"));
             escargot.Source = escargotDroit;
-            //vie1 = new BitmapImage(new Uri("pack://application:,,,/ressource/img/vie1.png"));
-            //vie2 = new BitmapImage(new Uri("pack://application:,,,/ressource/img/vie2.png"));
-            //vie3 = new BitmapImage(new Uri("pack://application:,,,/ressource/img/vie3.png"));
         }
+
         private void InitTimer()
         {
             minuterie = new DispatcherTimer();
@@ -110,6 +162,7 @@ namespace JEUX_ESCARGOT
             minuterie.Tick += Jeu;
             minuterie.Start();
         }
+
         public static void InitMusique()
         {
             sonDeFond = new MediaPlayer();
@@ -125,11 +178,6 @@ namespace JEUX_ESCARGOT
             sonDeFond.Play();
         }
 
-        //private void initCadeau()
-        //{
-        //    Canvas.SetTop(cadeau, 0);
-        //    Canvas.SetLeft(cadeau, rnd.Next(0, (int)this.ActualWidth));
-        //}
         private void Fenetre_ToucheLevee(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Right)
@@ -149,6 +197,7 @@ namespace JEUX_ESCARGOT
                 bas = false;
             }
         }
+
         private void Fenetre_TouchePressee(object sender, KeyEventArgs e)
         {
 #if DEBUG
@@ -182,6 +231,7 @@ namespace JEUX_ESCARGOT
                 BasculerMenuPause();
             }
         }
+
         private void Jeu(object? sender, EventArgs e)
         {
             l_score.Content = score;
@@ -189,34 +239,46 @@ namespace JEUX_ESCARGOT
             Canvas.SetTop(imageSaladeGauche, Canvas.GetTop(imageSaladeGauche) + VITESSE_SALADE);
 
             var saladeRect = new System.Drawing.Rectangle(
-            (int)Canvas.GetLeft(imageSaladeGauche),
-            (int)Canvas.GetTop(imageSaladeGauche),
-            (int)imageSaladeGauche.ActualWidth,
-            (int)imageSaladeGauche.ActualHeight);
+                (int)Canvas.GetLeft(imageSaladeGauche),
+                (int)Canvas.GetTop(imageSaladeGauche),
+                (int)imageSaladeGauche.ActualWidth,
+                (int)imageSaladeGauche.ActualHeight);
 
             var voitureRect = new System.Drawing.Rectangle(
-            (int)Canvas.GetLeft(voiture),
-            (int)Canvas.GetTop(voiture),
-            (int)voiture.ActualWidth,
-            (int)voiture.ActualHeight);
+                (int)Canvas.GetLeft(voiture),
+                (int)Canvas.GetTop(voiture),
+                (int)voiture.ActualWidth,
+                (int)voiture.ActualHeight);
 
             var voitureGaucheRect = new System.Drawing.Rectangle(
-            (int)Canvas.GetLeft(voitureGauche),
-            (int)Canvas.GetTop(voitureGauche),
-            (int)voitureGauche.ActualWidth,
-            (int)voitureGauche.ActualHeight);
+                (int)Canvas.GetLeft(voitureGauche),
+                (int)Canvas.GetTop(voitureGauche),
+                (int)voitureGauche.ActualWidth,
+                (int)voitureGauche.ActualHeight);
 
             var escargotRect = new System.Drawing.Rectangle(
-            (int)Canvas.GetLeft(escargot),
-            (int)Canvas.GetTop(escargot),
-            (int)escargot.ActualWidth,
-            (int)escargot.ActualHeight);
+                (int)Canvas.GetLeft(escargot),
+                (int)Canvas.GetTop(escargot),
+                (int)escargot.ActualWidth,
+                (int)escargot.ActualHeight);
 
             var saladeGaucheRect = new System.Drawing.Rectangle(
-            (int)Canvas.GetLeft(imageSaladeGauche),
-            (int)Canvas.GetTop(imageSaladeGauche),
-            (int)imageSaladeGauche.ActualWidth,
-            (int)imageSaladeGauche.ActualHeight);
+                (int)Canvas.GetLeft(imageSaladeGauche),
+                (int)Canvas.GetTop(imageSaladeGauche),
+                (int)imageSaladeGauche.ActualWidth,
+                (int)imageSaladeGauche.ActualHeight);
+
+            var familleRect = new System.Drawing.Rectangle(
+                (int)Canvas.GetLeft(familleEscargot),
+                (int)Canvas.GetTop(familleEscargot),
+                (int)familleEscargot.ActualWidth,
+                (int)familleEscargot.ActualHeight);
+
+            var grandParentsRect = new System.Drawing.Rectangle(
+                (int)Canvas.GetLeft(gpEscargot),
+                (int)Canvas.GetTop(gpEscargot),
+                (int)gpEscargot.ActualWidth,
+                (int)gpEscargot.ActualHeight);
 
             if (voitureRect.IntersectsWith(escargotRect) || voitureGaucheRect.IntersectsWith(escargotRect))
             {
@@ -235,8 +297,6 @@ namespace JEUX_ESCARGOT
                     MessageBox.Show("Game Over");
                     this.Close();
                 }
-                //MonImage.Visibility = System.Windows.Visibility.Visible; //pour afficher l'image
-
             }
 
             if (saladeGaucheRect.IntersectsWith(escargotRect))
@@ -244,6 +304,16 @@ namespace JEUX_ESCARGOT
                 score++;
                 Canvas.SetTop(imageSaladeGauche, 0 - imageSaladeGauche.ActualHeight);
                 RespawnSalad();
+            }
+
+            if (escargotRect.IntersectsWith(familleRect))
+            {
+                DonnerSaladesAFamille();
+            }
+
+            if (escargotRect.IntersectsWith(grandParentsRect))
+            {
+                DonnerSaladesAuxGrandParents();
             }
 
             if (gauche)
@@ -295,7 +365,7 @@ namespace JEUX_ESCARGOT
                 Canvas.SetTop(voiture, Canvas.GetTop(voiture) - VITESSE_VOITURE);
 
                 // Vérifier si la voiture est sortie de l'écran
-                if (Canvas.GetTop(voiture) < 0-voiture.ActualHeight)
+                if (Canvas.GetTop(voiture) < 0 - voiture.ActualHeight)
                 {
                     // Mettre en pause la descente
                     voitureEnAttente = true;
@@ -331,22 +401,23 @@ namespace JEUX_ESCARGOT
                 }
             }
         }
+
         private void RespawnSalad()
         {
             Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
             Canvas.SetLeft(imageSaladeGauche, rnd.Next((int)Canvas.GetLeft(route), (int)(Canvas.GetLeft(route) + route.ActualWidth - imageSaladeGauche.ActualHeight)));
             imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
         }
+
         private void RespawnVoiture()
         {
             Canvas.SetTop(voiture, this.ActualHeight + voiture.ActualHeight);
-            //Canvas.SetLeft(voiture, (int)(this.ActualWidth - (this.ActualWidth / 2)+30));
             voiture.Source = tabVoitures[rndVoiture.Next(0, 2)];
         }
+
         private void RespawnVoitureGauche()
         {
             Canvas.SetTop(voitureGauche, 0 - voitureGauche.ActualHeight);
-            //Canvas.SetLeft(voiture, (int)(this.ActualWidth - (this.ActualWidth / 2)+30));
             voitureGauche.Source = tabVoituresGauche[rndVoitureGauche.Next(0, 2)];
         }
 
@@ -365,6 +436,7 @@ namespace JEUX_ESCARGOT
                 PauseMenu.Visibility = Visibility.Collapsed;
             }
         }
+
         private void BoutonSon_Clic(object sender, RoutedEventArgs e)
         {
             // Logique pour gérer les paramètres sonores
@@ -380,6 +452,44 @@ namespace JEUX_ESCARGOT
         private void BoutonReprendre_Clic(object sender, RoutedEventArgs e)
         {
             BasculerMenuPause();
+        }
+
+        private void DonnerSaladesAFamille()
+        {
+            vieFamille = Math.Min(vieFamille + score, 5);
+            pbFamille.Value = vieFamille;
+            score = 0;
+        }
+
+        private void DonnerSaladesAuxGrandParents()
+        {
+            vieGrandParents = Math.Min(vieGrandParents + score, 5);
+            pbGrandParents.Value = vieGrandParents;
+            score = 0;
+        }
+
+        private void DiminuerVieFamille(object? sender, EventArgs e)
+        {
+            vieFamille = Math.Max(vieFamille - 1, 0);
+            pbFamille.Value = vieFamille;
+
+            if (vieFamille == 0)
+            {
+                MessageBox.Show("Game Over");
+                this.Close();
+            }
+        }
+
+        private void DiminuerVieGrandParents(object? sender, EventArgs e)
+        {
+            vieGrandParents = Math.Max(vieGrandParents - 1, 0);
+            pbGrandParents.Value = vieGrandParents;
+
+            if (vieGrandParents == 0)
+            {
+                MessageBox.Show("Game Over");
+                this.Close();
+            }
         }
     }
 }

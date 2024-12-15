@@ -42,6 +42,56 @@
                 VerticalAlignment="Top"
                 Source="/ressource/img/escargot-droit.png"
                 Stretch="Fill" />
+            <ProgressBar
+                x:Name="pbGrandParents"
+                Canvas.Left="40"
+                Canvas.Top="270"
+                Width="128"
+                Height="20"
+                Maximum="5"
+                Value="5">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="Red" Offset="0.0" />
+                        <GradientStop Color="Green" Offset="1.0" />
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
+            <Image
+                x:Name="gpEscargot"
+                Canvas.Left="40"
+                Canvas.Top="300"
+                Width="128"
+                Height="123"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Source="/ressource/img/gp_escargot.png"
+                Stretch="Fill" />
+            <ProgressBar
+                x:Name="pbFamille"
+                Canvas.Left="1150"
+                Canvas.Top="270"
+                Width="128"
+                Height="20"
+                Maximum="5"
+                Value="5">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="Red" Offset="0.0" />
+                        <GradientStop Color="Green" Offset="1.0" />
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
+            <Image
+                x:Name="familleEscargot"
+                Canvas.Left="1150"
+                Canvas.Top="300"
+                Width="128"
+                Height="123"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Source="/ressource/img/famille_escargot.png"
+                Stretch="Fill" />
             <Image
                 x:Name="voiture"
                 Canvas.Left="736"
