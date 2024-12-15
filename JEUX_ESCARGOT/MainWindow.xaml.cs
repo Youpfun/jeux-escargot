@@ -85,12 +85,12 @@ namespace JEUX_ESCARGOT
         // Méthode pour afficher le dialogue de difficulté
         private void AfficherDialogeDifficulte()
         {
-            // Créer une boîte de dialogue pour le menu
+            // Crée une boîte de dialogue pour le menu
             Window fenetreDialogue = new Window
             {
                 Title = "Choisissez la difficulté",
-                Width = 300,
-                Height = 250,
+                Width = 718,
+                Height = 400,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize
             };
@@ -122,13 +122,13 @@ namespace JEUX_ESCARGOT
                     Margin = new Thickness(0, 10, 0, 0)
                 };
 
-                // Capture de l'index pour la fermeture
+                // Récupère l'index de difficulté et ferme le menu lors d'un clic sur l'un des trois boutons
                 int indiceDifficulte = i;
-                boutonDifficulte.Click += (s, e) =>
+                boutonDifficulte.Click += (s, e) => //Gestionnaire d'événement (event handler) ajouté à l'événement Click du bouton
                 {
-                    difficulteCourante = (Difficulte)indiceDifficulte;
-                    DefinirVitesseEscargot(difficulteCourante);
-                    fenetreDialogue.Close();
+                    difficulteCourante = (Difficulte)indiceDifficulte; //Convertit indiceDifficulte en une valeur de l'enum Difficulte défini en haut
+                    DefinirVitesseEscargot(difficulteCourante); // Défini la difficulté
+                    fenetreDialogue.Close(); // Ferme le menu
                 };
 
                 panneau.Children.Add(boutonDifficulte);
@@ -145,6 +145,7 @@ namespace JEUX_ESCARGOT
             {
                 case Difficulte.Facile:
                     PAS_ESCARGOT = 10;
+                    VITESSE_VOITURE = 3;
                     break;
                 case Difficulte.Moyen:
                     PAS_ESCARGOT = 6;
