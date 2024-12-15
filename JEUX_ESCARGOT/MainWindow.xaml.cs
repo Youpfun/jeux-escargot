@@ -20,7 +20,7 @@ namespace JEUX_ESCARGOT
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int PAS_ESCARGOT = 20;
+        public int PAS_ESCARGOT = 10;
         private static BitmapImage escargotGauche;
         private static BitmapImage escargotDroit;
         private static DispatcherTimer minuterie;
@@ -39,10 +39,12 @@ namespace JEUX_ESCARGOT
         private static bool gauche, droite, haut, bas;
         private static MediaPlayer sonDeFond;
         private static readonly int VITESSE_SALADE = 5;
-        private static readonly int VITESSE_VOITURE = 7;
+        private static int VITESSE_VOITURE = 5;
         int score = 0, barreDeVie = 3;
         int vieFamille = 5;
         int vieGrandParents = 5;
+        
+        // Tableaux contenant les adresses des images pour pouvoir les faire varier lors des spawn
         System.Windows.Media.ImageSource[] tabSalades = new System.Windows.Media.ImageSource[]
         {
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade1bg.png")),
@@ -63,9 +65,96 @@ namespace JEUX_ESCARGOT
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3Retournee.png"))
         };
 
+        
+        //Permet de créer un type de donnée avec ses différentes valeurs possibles (ici : Facile, Moyen, Difficile)
+        public enum Difficulte
+        {
+            Facile,
+            Moyen,
+            Difficile
+        }
+
+        private Difficulte difficulteCourante = Difficulte.Moyen; // Difficulté par défaut (il en faut une sinon erreur)
+
         public MainWindow()
         {
             InitializeComponent();
+            AfficherDialogeDifficulte();
+        }
+
+        // Méthode pour afficher le dialogue de difficulté
+        private void AfficherDialogeDifficulte()
+        {
+            // Créer une boîte de dialogue pour le menu
+            Window fenetreDialogue = new Window
+            {
+                Title = "Choisissez la difficulté",
+                Width = 300,
+                Height = 250,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize
+            };
+
+            StackPanel panneau = new StackPanel
+            {
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            TextBlock titre = new TextBlock
+            {
+                Text = "Sélectionnez la difficulté",
+                FontSize = 18,
+                Margin = new Thickness(0, 0, 0, 20),
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            panneau.Children.Add(titre);
+
+            // Boutons de difficulté
+            string[] niveauxDifficulte = { "Facile", "Moyen", "Difficile" };
+            for (int i = 0; i < niveauxDifficulte.Length; i++)
+            {
+                Button boutonDifficulte = new Button
+                {
+                    Content = niveauxDifficulte[i],
+                    Width = 200,
+                    Height = 50,
+                    Margin = new Thickness(0, 10, 0, 0)
+                };
+
+                // Capture de l'index pour la fermeture
+                int indiceDifficulte = i;
+                boutonDifficulte.Click += (s, e) =>
+                {
+                    difficulteCourante = (Difficulte)indiceDifficulte;
+                    DefinirVitesseEscargot(difficulteCourante);
+                    fenetreDialogue.Close();
+                };
+
+                panneau.Children.Add(boutonDifficulte);
+            }
+
+            fenetreDialogue.Content = panneau;
+            fenetreDialogue.ShowDialog();
+        }
+
+        // La difficulté change la vitesse de l'escargot mais aussi celle des voitures
+        private void DefinirVitesseEscargot(Difficulte difficulte)
+        {
+            switch (difficulte)
+            {
+                case Difficulte.Facile:
+                    PAS_ESCARGOT = 10;
+                    break;
+                case Difficulte.Moyen:
+                    PAS_ESCARGOT = 6;
+                    break;
+                case Difficulte.Difficile:
+                    PAS_ESCARGOT = 15;
+                    VITESSE_VOITURE = 10;
+                    break;
+            }
+
             InitBitmaps();
             InitTimer();
             InitMusique();
