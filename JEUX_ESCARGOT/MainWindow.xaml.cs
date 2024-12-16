@@ -42,7 +42,7 @@ namespace JEUX_ESCARGOT
         private static readonly int VITESSE_SALADE = 5;
         private static int VITESSE_VOITURE = 5;
         private static int VITESSE_SOURIS = 1;
-        int score = 0, barreDeVie = 3;
+        int nbSalade = 0, barreDeVie = 3, score = 0;
         int vieFamille = 5;
         int vieGrandParents = 5;
         
@@ -328,7 +328,7 @@ namespace JEUX_ESCARGOT
 
         private void Jeu(object? sender, EventArgs e)
         {
-            l_score.Content = score;
+            l_nbSalade.Content = nbSalade;
             Random alea = new Random();
             Canvas.SetTop(imageSaladeGauche, Canvas.GetTop(imageSaladeGauche) + VITESSE_SALADE);
 
@@ -407,7 +407,7 @@ namespace JEUX_ESCARGOT
 
             if (saladeGaucheRect.IntersectsWith(escargotRect))
             {
-                score++;
+                nbSalade++;
                 Canvas.SetTop(imageSaladeGauche, 0 - imageSaladeGauche.ActualHeight);
                 RespawnSalad();
             }
@@ -575,22 +575,25 @@ namespace JEUX_ESCARGOT
 
         private void DonnerSaladesAFamille()
         {
-            vieFamille = Math.Min(vieFamille + score, 5);
+            vieFamille = Math.Min(vieFamille + nbSalade, 5);
             pbFamille.Value = vieFamille;
-            score = 0;
+            nbSalade = 0;
         }
 
         private void DonnerSaladesAuxGrandParents()
         {
-            vieGrandParents = Math.Min(vieGrandParents + score, 5);
+            Console.WriteLine(vieGrandParents);
+            vieGrandParents = Math.Min(vieGrandParents + nbSalade, 5);
             pbGrandParents.Value = vieGrandParents;
-            score = 0;
+            nbSalade = 0;
         }
 
         private void DiminuerVieFamille(object? sender, EventArgs e)
         {
             vieFamille = Math.Max(vieFamille - 1, 0);
             pbFamille.Value = vieFamille;
+            score += 1;
+            l_score.Content = score;
 
             if (vieFamille == 0)
             {
@@ -603,6 +606,8 @@ namespace JEUX_ESCARGOT
         {
             vieGrandParents = Math.Max(vieGrandParents - 1, 0);
             pbGrandParents.Value = vieGrandParents;
+            score += 1;
+            l_score.Content = score;
 
             if (vieGrandParents == 0)
             {

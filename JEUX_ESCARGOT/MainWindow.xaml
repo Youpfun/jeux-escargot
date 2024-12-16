@@ -22,6 +22,18 @@
             </Canvas.Background>
             <Label
                 x:Name="l_score"
+                Canvas.Left="1200"
+                Canvas.Top="18"
+                Width="39"
+                Height="28"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Black"
+                Content="0"
+                Foreground="White"
+                Opacity="0.8" />
+            <Label
+                x:Name="l_nbSalade"
                 Canvas.Left="43"
                 Canvas.Top="18"
                 Width="39"
