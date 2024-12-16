@@ -14,8 +14,6 @@
     <None Remove="ressource\img\famille_escargot.png" />
     <None Remove="ressource\img\grenouille_droite.png" />
     <None Remove="ressource\img\grenouille_gauche.png" />
-    <None Remove="ressource\img\lezard.png" />
-    <None Remove="ressource\img\oiseau.png" />
     <None Remove="ressource\img\route.png" />
     <None Remove="ressource\img\salade1bg.png" />
     <None Remove="ressource\img\salade2bg.png" />
@@ -51,12 +49,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\grenouille_gauche.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="ressource\img\lezard.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="ressource\img\oiseau.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\route.png">
