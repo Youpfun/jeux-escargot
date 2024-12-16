@@ -95,7 +95,12 @@ namespace JEUX_ESCARGOT
                 Width = 718,
                 Height = 400,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
-                ResizeMode = ResizeMode.NoResize
+                ResizeMode = ResizeMode.NoResize,
+                Background = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri("pack://application:,,,/ressource/img/menu.png")),
+                    Stretch = Stretch.UniformToFill
+                }
             };
 
             StackPanel panneau = new StackPanel
