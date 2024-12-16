@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Drawing;
 using System.Data;
+using System;
 
 namespace JEUX_ESCARGOT
 {
@@ -40,6 +41,7 @@ namespace JEUX_ESCARGOT
         private static MediaPlayer sonDeFond;
         private static readonly int VITESSE_SALADE = 5;
         private static int VITESSE_VOITURE = 5;
+        private static int VITESSE_SOURIS = 1;
         int score = 0, barreDeVie = 3;
         int vieFamille = 5;
         int vieGrandParents = 5;
@@ -127,7 +129,7 @@ namespace JEUX_ESCARGOT
                 boutonDifficulte.Click += (s, e) => //Gestionnaire d'événement (event handler) ajouté à l'événement Click du bouton
                 {
                     difficulteCourante = (Difficulte)indiceDifficulte; //Convertit indiceDifficulte en une valeur de l'enum Difficulte défini en haut
-                    DefinirVitesseEscargot(difficulteCourante); // Défini la difficulté
+                    DefinirVitesse(difficulteCourante); // Défini la difficulté
                     fenetreDialogue.Close(); // Ferme le menu
                 };
 
@@ -139,7 +141,7 @@ namespace JEUX_ESCARGOT
         }
 
         // La difficulté change la vitesse de l'escargot mais aussi celle des voitures
-        private void DefinirVitesseEscargot(Difficulte difficulte)
+        private void DefinirVitesse(Difficulte difficulte)
         {
             switch (difficulte)
             {
@@ -149,10 +151,12 @@ namespace JEUX_ESCARGOT
                     break;
                 case Difficulte.Moyen:
                     PAS_ESCARGOT = 6;
+                    VITESSE_SOURIS = 4;
                     break;
                 case Difficulte.Difficile:
                     PAS_ESCARGOT = 15;
                     VITESSE_VOITURE = 10;
+                    VITESSE_SOURIS = 10;
                     break;
             }
 
@@ -370,7 +374,19 @@ namespace JEUX_ESCARGOT
                 (int)gpEscargot.ActualWidth,
                 (int)gpEscargot.ActualHeight);
 
-            if (voitureRect.IntersectsWith(escargotRect) || voitureGaucheRect.IntersectsWith(escargotRect))
+            var sourisRect = new System.Drawing.Rectangle(
+                (int)Canvas.GetLeft(souris),
+                (int)Canvas.GetTop(souris),
+                (int)souris.ActualWidth,
+                (int)souris.ActualHeight);
+
+            if (sourisRect.IntersectsWith(familleRect) || sourisRect.IntersectsWith(grandParentsRect))
+            {
+                MessageBox.Show("Game Over");
+                this.Close();
+            }
+
+            if (voitureRect.IntersectsWith(escargotRect) || voitureGaucheRect.IntersectsWith(escargotRect) || sourisRect.IntersectsWith(escargotRect))
             {
                 barreDeVie--;
                 Canvas.SetLeft(escargot, 0);
@@ -490,6 +506,7 @@ namespace JEUX_ESCARGOT
                     }
                 }
             }
+            DeplacementEnnemi();
         }
 
         private void RespawnSalad()
@@ -509,6 +526,13 @@ namespace JEUX_ESCARGOT
         {
             Canvas.SetTop(voitureGauche, 0 - voitureGauche.ActualHeight);
             voitureGauche.Source = tabVoituresGauche[rndVoitureGauche.Next(0, 2)];
+        }
+
+        private void DeplacementEnnemi()
+        {
+            Canvas.SetLeft(souris, Canvas.GetLeft(souris) + Math.Sign(Canvas.GetLeft(escargot) - Canvas.GetLeft(souris)));
+            Canvas.SetTop(souris, Canvas.GetTop(souris) + Math.Sign(Canvas.GetTop(escargot) - Canvas.GetTop(souris)));
+
         }
 
         private void BasculerMenuPause()
@@ -537,15 +561,16 @@ namespace JEUX_ESCARGOT
             MessageBox.Show("Paramètres sonores à implémenter");
         }
 
-        private void BoutonResolution_Clic(object sender, RoutedEventArgs e)
-        {
-            // Logique pour gérer la résolution
-            MessageBox.Show("Paramètres de résolution à implémenter");
-        }
-
         private void BoutonReprendre_Clic(object sender, RoutedEventArgs e)
         {
             BasculerMenuPause();
+        }
+
+        private void BoutonRegles_Clic(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("L'objectif est de nourir les grands-parents et la famille escargot.\n\n" +
+                "Il faut éviter les voitures et la souris. Si ces derniers touchent l'escargot, le joueur perd une vie symbolisée par les coeurs en haut à gauche.\n\n" +
+                "La souris ne doit pas atteindre ni les grands-parents ni la famille sous peine de perdre instantanément.");
         }
 
         private void DonnerSaladesAFamille()
