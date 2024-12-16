@@ -43,6 +43,7 @@ namespace JEUX_ESCARGOT
         private static int VITESSE_VOITURE = 5;
         private static int VITESSE_SOURIS = 1;
         int nbSalade = 0, barreDeVie = 3, score = 0;
+        private const int MAX_VIE = 5;
         int vieFamille = 5;
         int vieGrandParents = 5;
         
@@ -562,8 +563,35 @@ namespace JEUX_ESCARGOT
 
         private void BoutonSon_Clic(object sender, RoutedEventArgs e)
         {
-            // Logique pour gérer les paramètres sonores
-            MessageBox.Show("Paramètres sonores à implémenter");
+            // Hide main pause menu buttons
+            SonButton.Visibility = Visibility.Collapsed;
+            ReglesButton.Visibility = Visibility.Collapsed;
+            ReprendreButton.Visibility = Visibility.Collapsed;
+
+            // Show sound settings grid
+            SoundSettingsGrid.Visibility = Visibility.Visible;
+
+            // Set slider to current volume
+            VolumeSlider.Value = sonDeFond.Volume;
+        }
+        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            // Update background music volume
+            if (sonDeFond != null)
+            {
+                sonDeFond.Volume = VolumeSlider.Value;
+            }
+        }
+
+        private void BoutonRetourParametresSon_Clic(object sender, RoutedEventArgs e)
+        {
+            // Hide sound settings grid
+            SoundSettingsGrid.Visibility = Visibility.Collapsed;
+
+            // Restore main pause menu buttons
+            SonButton.Visibility = Visibility.Visible;
+            ReglesButton.Visibility = Visibility.Visible;
+            ReprendreButton.Visibility = Visibility.Visible;
         }
 
         private void BoutonReprendre_Clic(object sender, RoutedEventArgs e)
@@ -580,7 +608,7 @@ namespace JEUX_ESCARGOT
 
         private void DonnerSaladesAFamille()
         {
-            vieFamille = Math.Min(vieFamille + nbSalade, 5);
+            vieFamille = Math.Min(vieFamille + nbSalade, MAX_VIE);
             pbFamille.Value = vieFamille;
             nbSalade = 0;
         }
@@ -588,7 +616,7 @@ namespace JEUX_ESCARGOT
         private void DonnerSaladesAuxGrandParents()
         {
             Console.WriteLine(vieGrandParents);
-            vieGrandParents = Math.Min(vieGrandParents + nbSalade, 5);
+            vieGrandParents = Math.Min(vieGrandParents + nbSalade, MAX_VIE);
             pbGrandParents.Value = vieGrandParents;
             nbSalade = 0;
         }
