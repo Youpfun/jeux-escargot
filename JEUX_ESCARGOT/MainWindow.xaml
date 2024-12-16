@@ -34,10 +34,10 @@
                 Opacity="0.8" />
             <Image
                 x:Name="escargot"
-                Canvas.Left="542"
-                Canvas.Top="186"
-                Width="128"
-                Height="123"
+                Canvas.Left="600"
+                Canvas.Top="240"
+                Width="70"
+                Height="69"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Source="/ressource/img/escargot-droit.png"
