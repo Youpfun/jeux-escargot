@@ -412,6 +412,11 @@ namespace JEUX_ESCARGOT
                 RespawnSalad();
             }
 
+            if (sourisRect.IntersectsWith(voitureRect) || sourisRect.IntersectsWith(voitureGaucheRect))
+            {
+
+            }
+
             if (escargotRect.IntersectsWith(familleRect))
             {
                 DonnerSaladesAFamille();
