@@ -517,12 +517,16 @@ namespace JEUX_ESCARGOT
             {
                 // Mettre en pause le jeu
                 minuterie.Stop();
+                vieFamilleTimer.Stop();
+                vieGrandParentsTimer.Stop();
                 PauseMenu.Visibility = Visibility.Visible;
             }
             else
             {
                 // Reprendre le jeu
                 minuterie.Start();
+                vieFamilleTimer.Start();
+                vieGrandParentsTimer.Start();
                 PauseMenu.Visibility = Visibility.Collapsed;
             }
         }
