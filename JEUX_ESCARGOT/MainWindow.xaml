@@ -73,8 +73,8 @@
                 x:Name="gpEscargot"
                 Canvas.Left="40"
                 Canvas.Top="300"
-                Width="128"
-                Height="123"
+                Width="149"
+                Height="105"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Source="/ressource/img/gp_escargot.png"
@@ -98,8 +98,8 @@
                 x:Name="familleEscargot"
                 Canvas.Left="1150"
                 Canvas.Top="300"
-                Width="128"
-                Height="123"
+                Width="149"
+                Height="105"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Source="/ressource/img/famille_escargot.png"
@@ -140,8 +140,8 @@
                 Stretch="Fill" />
             <Image
                 x:Name="souris"
-                Canvas.Left="259"
-                Canvas.Top="637"
+                Canvas.Left="1150"
+                Canvas.Top="550"
                 Width="69"
                 Height="81"
                 HorizontalAlignment="Left"
@@ -249,7 +249,6 @@
                                 Content="Retour" />
                         </StackPanel>
                     </Grid>
-
                     <Button
                         x:Name="ReglesButton"
                         Width="200"
@@ -257,6 +256,13 @@
                         Margin="0,10"
                         Click="BoutonRegles_Clic"
                         Content="Règles du jeu" />
+                    <Button
+                        x:Name="DifficulteButton"
+                        Width="200"
+                        Height="50"
+                        Margin="0,10"
+                        Click="DifficulteButton_Clic"
+                        Content="Changer de difficulté" />
                     <Button
                         x:Name="ReprendreButton"
                         Width="200"

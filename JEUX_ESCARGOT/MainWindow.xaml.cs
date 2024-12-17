@@ -86,10 +86,25 @@ namespace JEUX_ESCARGOT
             InitializeComponent();
             AfficherDialogeDifficulte();
         }
-
+        public void InitDebut()
+        {
+            vie3.Visibility = System.Windows.Visibility.Visible;
+            vie2.Visibility = System.Windows.Visibility.Visible;
+            nbSalade = 0; 
+            barreDeVie = 3; 
+            score = 0;
+            l_score.Content = 0;
+            droite = false;
+            gauche = false;
+            haut = false;
+            bas = false;
+            Canvas.SetTop(souris, 550);
+            Canvas.SetLeft(souris, 1150);
+        }
         // Méthode pour afficher le dialogue de difficulté
         private void AfficherDialogeDifficulte()
         {
+            InitDebut();
             // Crée une boîte de dialogue pour le menu
             Window fenetreDialogue = new Window
             {
@@ -339,7 +354,6 @@ namespace JEUX_ESCARGOT
         private void Jeu(object? sender, EventArgs e)
         {
             l_nbSalade.Content = nbSalade;
-            Random alea = new Random();
             Canvas.SetTop(imageSaladeGauche, Canvas.GetTop(imageSaladeGauche) + VITESSE_SALADE);
 
             var saladeRect = new System.Drawing.Rectangle(
@@ -576,6 +590,7 @@ namespace JEUX_ESCARGOT
             SonButton.Visibility = Visibility.Collapsed;
             ReglesButton.Visibility = Visibility.Collapsed;
             ReprendreButton.Visibility = Visibility.Collapsed;
+            DifficulteButton.Visibility = Visibility.Collapsed;
 
             // Show sound settings grid
             SoundSettingsGrid.Visibility = Visibility.Visible;
@@ -601,6 +616,7 @@ namespace JEUX_ESCARGOT
             SonButton.Visibility = Visibility.Visible;
             ReglesButton.Visibility = Visibility.Visible;
             ReprendreButton.Visibility = Visibility.Visible;
+            DifficulteButton.Visibility = Visibility.Visible;
         }
 
         private void BoutonReprendre_Clic(object sender, RoutedEventArgs e)
@@ -613,6 +629,10 @@ namespace JEUX_ESCARGOT
             MessageBox.Show("L'objectif est de nourir les grands-parents et la famille escargot.\n\n" +
                 "Il faut éviter les voitures et la souris. Si ces derniers touchent l'escargot, le joueur perd une vie symbolisée par les coeurs en haut à gauche.\n\n" +
                 "La souris ne doit pas atteindre ni les grands-parents ni la famille sous peine de perdre instantanément.");
+        }
+        private void DifficulteButton_Clic(object sender, RoutedEventArgs e)
+        {
+            this.AfficherDialogeDifficulte();
         }
 
         private void DonnerSaladesAFamille()
@@ -660,8 +680,10 @@ namespace JEUX_ESCARGOT
             minuterie.Stop();
             vieFamilleTimer.Stop();
             vieGrandParentsTimer.Stop();
+            InitDebut();
+            sonDeFond.Stop();
             MessageBox.Show("Game Over");
-            this.Close();
+            this.AfficherDialogeDifficulte();
         }
     }
 }

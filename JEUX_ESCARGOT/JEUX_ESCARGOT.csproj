@@ -54,12 +54,6 @@
     <Resource Include="ressource\img\gp_escargot.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="ressource\img\grenouille_droite.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="ressource\img\grenouille_gauche.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="ressource\img\menu.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
