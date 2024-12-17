@@ -632,7 +632,7 @@ namespace JEUX_ESCARGOT
         }
         private void DifficulteButton_Clic(object sender, RoutedEventArgs e)
         {
-            this.AfficherDialogeDifficulte();
+            Mort();
         }
 
         private void DonnerSaladesAFamille()
