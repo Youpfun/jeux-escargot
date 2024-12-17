@@ -12,48 +12,82 @@
     KeyUp="Fenetre_ToucheLevee"
     ResizeMode="NoResize"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <Style x:Key="ModernGameButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0,10"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10"
+                            BorderThickness="0">
+                            <ContentPresenter 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center"
+                                Margin="0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Canvas Name="myCanvas">
             <Canvas.Background>
                 <ImageBrush ImageSource="/ressource/img/route.png" Stretch="Fill" />
             </Canvas.Background>
+
+            <!-- Score Labels -->
             <Label
                 x:Name="l_score"
                 Canvas.Left="1200"
                 Canvas.Top="18"
                 Width="39"
                 Height="28"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Background="Black"
                 Content="0"
                 Foreground="White"
                 Opacity="0.8" />
+
             <Label
                 x:Name="l_nbSalade"
                 Canvas.Left="43"
                 Canvas.Top="18"
                 Width="39"
                 Height="28"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Background="Black"
                 Content="0"
                 Foreground="White"
                 Opacity="0.8" />
+
+            <!-- Main Character Snail -->
             <Image
                 x:Name="escargot"
                 Canvas.Left="600"
                 Canvas.Top="240"
                 Width="70"
                 Height="69"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Source="/ressource/img/escargot-droit.png"
                 Stretch="Fill" />
+
+            <!-- Grandparents Snail Progress -->
             <ProgressBar
                 x:Name="pbGrandParents"
                 Canvas.Left="40"
@@ -69,16 +103,17 @@
                     </LinearGradientBrush>
                 </ProgressBar.Foreground>
             </ProgressBar>
+
             <Image
                 x:Name="gpEscargot"
                 Canvas.Left="40"
                 Canvas.Top="300"
                 Width="149"
                 Height="105"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Source="/ressource/img/gp_escargot.png"
                 Stretch="Fill" />
+
+            <!-- Family Snail Progress -->
             <ProgressBar
                 x:Name="pbFamille"
                 Canvas.Left="1150"
@@ -94,16 +129,17 @@
                     </LinearGradientBrush>
                 </ProgressBar.Foreground>
             </ProgressBar>
+
             <Image
                 x:Name="familleEscargot"
                 Canvas.Left="1150"
                 Canvas.Top="300"
                 Width="149"
                 Height="105"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 Source="/ressource/img/famille_escargot.png"
                 Stretch="Fill" />
+
+            <!-- Vehicles and Other Game Objects -->
             <Image
                 x:Name="voiture"
                 Canvas.Left="736"
@@ -113,6 +149,7 @@
                 Panel.ZIndex="2"
                 Source="/ressource/img/voiture1.png"
                 Stretch="Fill" />
+
             <Image
                 x:Name="imageSaladeGauche"
                 Canvas.Left="381"
@@ -120,15 +157,15 @@
                 Panel.ZIndex="1"
                 Source="/ressource/img/salade1bg.png"
                 Stretch="Fill" />
+
             <Image
                 Canvas.Left="15"
                 Canvas.Top="14"
                 Width="23"
                 Height="36"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
                 Source="/ressource/img/salade3bg.png"
                 Stretch="Fill" />
+
             <Image
                 x:Name="voitureGauche"
                 Canvas.Left="300"
@@ -138,39 +175,40 @@
                 Panel.ZIndex="2"
                 Source="/ressource/img/voiture3Retournee.png"
                 Stretch="Fill" />
+
             <Image
                 x:Name="souris"
                 Canvas.Left="1150"
                 Canvas.Top="550"
                 Width="69"
                 Height="81"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
                 Source="/ressource/img/souris.png"
                 Stretch="Fill" />
+
+            <!-- Game Area Borders -->
             <Border
                 x:Name="route"
                 Canvas.Left="247"
                 Width="820"
                 Height="718"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
                 BorderThickness="1" />
+
             <Border
                 x:Name="herbeGauche"
                 Width="247"
                 Height="718"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
                 BorderThickness="1" />
+
             <Border
                 x:Name="herbeDroit"
                 Width="250"
                 Height="718"
                 Margin="1067,0,0,0"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Center"
                 BorderThickness="1" />
+
+            <!-- Life Hearts -->
             <Image
                 x:Name="vie1"
                 Canvas.Left="8"
@@ -197,11 +235,11 @@
                 Stretch="Fill" />
         </Canvas>
 
-        <!--  Menu de pause  -->
+        <!-- Pause Menu -->
         <Grid x:Name="PauseMenu" Visibility="Collapsed">
             <Border
                 Width="600"
-                Height="450"
+                Height="500"
                 Padding="20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -209,28 +247,42 @@
                 <Border.Background>
                     <ImageBrush ImageSource="/ressource/img/menu.png" />
                 </Border.Background>
+
                 <StackPanel>
                     <TextBlock
                         Margin="0,0,0,20"
                         HorizontalAlignment="Center"
                         FontSize="24"
                         Text="Menu" />
+
+                    <!-- Buttons with Modern Style -->
                     <Button
                         x:Name="ReprendreBoutton"
-                        Width="200"
-                        Height="50"
-                        Margin="0,10"
+                        Style="{StaticResource ModernGameButtonStyle}"
                         Click="BoutonReprendre_Clic"
-                        Content="Reprendre" />
+                        Content="Reprendre">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#4CAF50" Offset="0"/>
+                                <GradientStop Color="#45A049" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
                     <Button
                         x:Name="SonBoutton"
-                        Width="200"
-                        Height="50"
-                        Margin="0,10"
+                        Style="{StaticResource ModernGameButtonStyle}"
                         Click="BoutonSon_Clic"
-                        Content="Son" />
+                        Content="Son">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#2196F3" Offset="0"/>
+                                <GradientStop Color="#1E88E5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
 
-                    <!--  New sound settings grid, initially hidden  -->
+                    <!-- Sound Settings Grid -->
                     <Grid x:Name="SoundSettingsGrid" Visibility="Collapsed">
                         <StackPanel>
                             <TextBlock
@@ -248,34 +300,57 @@
                                 Value="1" />
                             <Button
                                 x:Name="RetourParametresSon"
-                                Width="200"
-                                Height="50"
-                                Margin="0,20"
+                                Style="{StaticResource ModernGameButtonStyle}"
                                 Click="BoutonRetourParametresSon_Clic"
-                                Content="Retour" />
+                                Content="Retour">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FF9800" Offset="0"/>
+                                        <GradientStop Color="#F57C00" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
                         </StackPanel>
                     </Grid>
+
                     <Button
                         x:Name="ReglesBoutton"
-                        Width="200"
-                        Height="50"
-                        Margin="0,10"
+                        Style="{StaticResource ModernGameButtonStyle}"
                         Click="BoutonRegles_Clic"
-                        Content="Règles du jeu" />
+                        Content="Règles du jeu">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#FF9800" Offset="0"/>
+                                <GradientStop Color="#F57C00" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
                     <Button
                         x:Name="DifficulteBoutton"
-                        Width="200"
-                        Height="50"
-                        Margin="0,10"
+                        Style="{StaticResource ModernGameButtonStyle}"
                         Click="DifficulteBoutton_Clic"
-                        Content="Changer de difficulté" />
+                        Content="Changer de difficulté">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#9C27B0" Offset="0"/>
+                                <GradientStop Color="#8E24AA" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+
                     <Button
                         x:Name="QuitterBoutton"
-                        Width="200"
-                        Height="50"
-                        Margin="0,10"
+                        Style="{StaticResource ModernGameButtonStyle}"
                         Click="BoutonQuitter_Click"
-                        Content="Quitter" />
+                        Content="Quitter">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#F44336" Offset="0"/>
+                                <GradientStop Color="#D32F2F" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
                 </StackPanel>
             </Border>
         </Grid>
