@@ -99,14 +99,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ressource\son\crissementDePneus.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="ressource\son\easterEgg.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="ressource\son\sonDeFond.mp3">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

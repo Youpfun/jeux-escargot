@@ -348,9 +348,9 @@ namespace JEUX_ESCARGOT
 
         private void Fenetre_TouchePressee(object sender, KeyEventArgs e)
         {
-/*#if DEBUG
-            Console.WriteLine(e.Key); // si besoin de debug si touche non detect
-#endif*/
+            /*#if DEBUG
+                        Console.WriteLine(e.Key); // si besoin de debug si touche non detect
+            #endif*/
             if (e.Key == Key.Right)
             {
                 droite = true;
@@ -468,7 +468,7 @@ namespace JEUX_ESCARGOT
             {
                 nbSalade++;
                 Canvas.SetTop(imageSaladeGauche, 0 - imageSaladeGauche.ActualHeight);
-                ReaparitionSalad();
+                ReapparitionSalad();
             }
             if (escargotRect.IntersectsWith(familleRect))
             {
@@ -519,7 +519,7 @@ namespace JEUX_ESCARGOT
                     saladeEnAttente = true;
 
                     // Positionner la salade au-dessus de l'écran
-                    ReaparitionSalad();
+                    ReapparitionSalad();
 
                     // Démarrer le timer de pause
                     saladeTimer.Start();
@@ -537,7 +537,7 @@ namespace JEUX_ESCARGOT
                     voitureEnAttente = true;
 
                     // Positionner la voiture au-dessus de l'écran
-                    ReaparitionVoiture();
+                    ReapparitionVoiture();
 
                     // Démarrer le timer de pause UNIQUEMENT s'il n'est pas déjà en cours
                     if (!voitureTimer.IsEnabled)
@@ -557,7 +557,7 @@ namespace JEUX_ESCARGOT
                     voitureGaucheEnAttente = true;
 
                     // Positionner la voiture au-dessus de l'écran
-                    ReaparitionVoitureGauche();
+                    ReapparitionVoitureGauche();
 
                     // Démarrer le timer de pause UNIQUEMENT s'il n'est pas déjà en cours
                     if (!voitureGaucheTimer.IsEnabled)
@@ -569,20 +569,20 @@ namespace JEUX_ESCARGOT
             DeplacementEnnemi();
         }
 
-        private void ReaparitionSalad()
+        private void ReapparitionSalad()
         {
             Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
             Canvas.SetLeft(imageSaladeGauche, rnd.Next((int)Canvas.GetLeft(route), (int)(Canvas.GetLeft(route) + route.ActualWidth - imageSaladeGauche.ActualHeight)));
             imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
         }
 
-        private void ReaparitionVoiture()
+        private void ReapparitionVoiture()
         {
             Canvas.SetTop(voiture, this.ActualHeight + voiture.ActualHeight);
             voiture.Source = tabVoitures[rndVoiture.Next(0, 2)];
         }
 
-        private void ReaparitionVoitureGauche()
+        private void ReapparitionVoitureGauche()
         {
             Canvas.SetTop(voitureGauche, 0 - voitureGauche.ActualHeight);
             voitureGauche.Source = tabVoituresGauche[rndVoitureGauche.Next(0, 2)];
@@ -630,7 +630,7 @@ namespace JEUX_ESCARGOT
             // Set slider to current volume
             VolumeSlider.Value = sonDeFond.Volume;
         }
-        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void VolumeSlider_ValeurChange(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Update background music volume
             if (sonDeFond != null)

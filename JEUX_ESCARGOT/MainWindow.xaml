@@ -244,7 +244,7 @@
                                 Maximum="1"
                                 Minimum="0"
                                 TickFrequency="0.1"
-                                ValueChanged="VolumeSlider_ValueChanged"
+                                ValueChanged="VolumeSlider_ValeurChange"
                                 Value="1" />
                             <Button
                                 x:Name="RetourParametresSon"
