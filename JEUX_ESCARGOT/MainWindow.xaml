@@ -216,14 +216,14 @@
                         FontSize="24"
                         Text="Menu" />
                     <Button
-                        x:Name="ReprendreButton"
+                        x:Name="ReprendreBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"
                         Click="BoutonReprendre_Clic"
                         Content="Reprendre" />
                     <Button
-                        x:Name="SonButton"
+                        x:Name="SonBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"
@@ -256,21 +256,21 @@
                         </StackPanel>
                     </Grid>
                     <Button
-                        x:Name="ReglesButton"
+                        x:Name="ReglesBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"
                         Click="BoutonRegles_Clic"
                         Content="Règles du jeu" />
                     <Button
-                        x:Name="DifficulteButton"
+                        x:Name="DifficulteBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"
-                        Click="DifficulteButton_Clic"
+                        Click="DifficulteBoutton_Clic"
                         Content="Changer de difficulté" />
                     <Button
-                        x:Name="QuitterButton"
+                        x:Name="QuitterBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"

@@ -48,7 +48,7 @@ namespace JEUX_ESCARGOT
         private const int MAX_VIE = 5;
         int vieFamille = 5;
         int vieGrandParents = 5;
-        
+
         //Bouton quitter dans le menu (init ici car méthode de génération différente de celle des boutons de difficulté)
         private Button boutonQuitter;
 
@@ -61,7 +61,7 @@ namespace JEUX_ESCARGOT
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade4bg.png")),
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade5bg.png")),
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade6bg.png"))
-        };  
+        };
         System.Windows.Media.ImageSource[] tabVoitures = new System.Windows.Media.ImageSource[]
         {
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1.png")),
@@ -73,7 +73,7 @@ namespace JEUX_ESCARGOT
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3Retournee.png"))
         };
 
-        
+
         //Permet de créer un type de donnée avec ses différentes valeurs possibles (ici : Facile, Moyen, Difficile)
         public enum Difficulte
         {
@@ -93,8 +93,8 @@ namespace JEUX_ESCARGOT
         {
             vie3.Visibility = System.Windows.Visibility.Visible;
             vie2.Visibility = System.Windows.Visibility.Visible;
-            nbSalade = 0; 
-            barreDeVie = 3; 
+            nbSalade = 0;
+            barreDeVie = 3;
             score = 0;
             l_score.Content = 0;
             droite = false;
@@ -448,7 +448,7 @@ namespace JEUX_ESCARGOT
             {
                 nbSalade++;
                 Canvas.SetTop(imageSaladeGauche, 0 - imageSaladeGauche.ActualHeight);
-                RespawnSalad();
+                ReaparitionSalad();
             }
 
             if (sourisRect.IntersectsWith(voitureRect) || sourisRect.IntersectsWith(voitureGaucheRect))
@@ -484,8 +484,8 @@ namespace JEUX_ESCARGOT
             {
                 escargot.Source = escargotBas;
                 Canvas.SetTop(escargot, Canvas.GetTop(escargot) + PAS_ESCARGOT);
-                if (Canvas.GetTop(escargot) > this.ActualHeight - escargotRect.Height + PAS_ESCARGOT)
-                    Canvas.SetTop(escargot, this.ActualHeight - escargotRect.Height + PAS_ESCARGOT);
+                if (Canvas.GetTop(escargot) > this.ActualHeight - escargotRect.Height - PAS_ESCARGOT)
+                    Canvas.SetTop(escargot, this.ActualHeight - escargotRect.Height - PAS_ESCARGOT);
             }
             if (haut)
             {
@@ -505,7 +505,7 @@ namespace JEUX_ESCARGOT
                     saladeEnAttente = true;
 
                     // Positionner la salade au-dessus de l'écran
-                    RespawnSalad();
+                    ReaparitionSalad();
 
                     // Démarrer le timer de pause
                     saladeTimer.Start();
@@ -523,7 +523,7 @@ namespace JEUX_ESCARGOT
                     voitureEnAttente = true;
 
                     // Positionner la voiture au-dessus de l'écran
-                    RespawnVoiture();
+                    ReaparitionVoiture();
 
                     // Démarrer le timer de pause UNIQUEMENT s'il n'est pas déjà en cours
                     if (!voitureTimer.IsEnabled)
@@ -543,7 +543,7 @@ namespace JEUX_ESCARGOT
                     voitureGaucheEnAttente = true;
 
                     // Positionner la voiture au-dessus de l'écran
-                    RespawnVoitureGauche();
+                    ReaparitionVoitureGauche();
 
                     // Démarrer le timer de pause UNIQUEMENT s'il n'est pas déjà en cours
                     if (!voitureGaucheTimer.IsEnabled)
@@ -555,20 +555,20 @@ namespace JEUX_ESCARGOT
             DeplacementEnnemi();
         }
 
-        private void RespawnSalad()
+        private void ReaparitionSalad()
         {
             Canvas.SetTop(imageSaladeGauche, -imageSaladeGauche.ActualHeight);
             Canvas.SetLeft(imageSaladeGauche, rnd.Next((int)Canvas.GetLeft(route), (int)(Canvas.GetLeft(route) + route.ActualWidth - imageSaladeGauche.ActualHeight)));
             imageSaladeGauche.Source = tabSalades[rndSalade.Next(0, 5)];
         }
 
-        private void RespawnVoiture()
+        private void ReaparitionVoiture()
         {
             Canvas.SetTop(voiture, this.ActualHeight + voiture.ActualHeight);
             voiture.Source = tabVoitures[rndVoiture.Next(0, 2)];
         }
 
-        private void RespawnVoitureGauche()
+        private void ReaparitionVoitureGauche()
         {
             Canvas.SetTop(voitureGauche, 0 - voitureGauche.ActualHeight);
             voitureGauche.Source = tabVoituresGauche[rndVoitureGauche.Next(0, 2)];
@@ -604,10 +604,11 @@ namespace JEUX_ESCARGOT
         private void BoutonSon_Clic(object sender, RoutedEventArgs e)
         {
             // Hide main pause menu buttons
-            SonButton.Visibility = Visibility.Collapsed;
-            ReglesButton.Visibility = Visibility.Collapsed;
-            ReprendreButton.Visibility = Visibility.Collapsed;
-            DifficulteButton.Visibility = Visibility.Collapsed;
+            SonBoutton.Visibility = Visibility.Collapsed;
+            ReglesBoutton.Visibility = Visibility.Collapsed;
+            ReprendreBoutton.Visibility = Visibility.Collapsed;
+            DifficulteBoutton.Visibility = Visibility.Collapsed;
+            QuitterBoutton.Visibility = Visibility.Collapsed;
 
             // Show sound settings grid
             SoundSettingsGrid.Visibility = Visibility.Visible;
@@ -630,10 +631,11 @@ namespace JEUX_ESCARGOT
             SoundSettingsGrid.Visibility = Visibility.Collapsed;
 
             // Restore main pause menu buttons
-            SonButton.Visibility = Visibility.Visible;
-            ReglesButton.Visibility = Visibility.Visible;
-            ReprendreButton.Visibility = Visibility.Visible;
-            DifficulteButton.Visibility = Visibility.Visible;
+            SonBoutton.Visibility = Visibility.Visible;
+            ReglesBoutton.Visibility = Visibility.Visible;
+            ReprendreBoutton.Visibility = Visibility.Visible;
+            DifficulteBoutton.Visibility = Visibility.Visible;
+            QuitterBoutton.Visibility = Visibility.Visible;
         }
 
         private void BoutonReprendre_Clic(object sender, RoutedEventArgs e)
@@ -647,7 +649,7 @@ namespace JEUX_ESCARGOT
                 "Il faut éviter les voitures et la souris. Si ces derniers touchent l'escargot, le joueur perd une vie symbolisée par les coeurs en haut à gauche.\n\n" +
                 "La souris ne doit pas atteindre ni les grands-parents ni la famille sous peine de perdre instantanément.");
         }
-        private void DifficulteButton_Clic(object sender, RoutedEventArgs e)
+        private void DifficulteBoutton_Clic(object sender, RoutedEventArgs e)
         {
             Mort();
         }
@@ -699,7 +701,7 @@ namespace JEUX_ESCARGOT
             vieGrandParentsTimer.Stop();
             InitDebut();
             sonDeFond.Stop();
-            MessageBox.Show("Game Over","Fin de partie", MessageBoxButton.OK,MessageBoxImage.Error);
+            MessageBox.Show("Game Over", "Fin de partie", MessageBoxButton.OK, MessageBoxImage.Error);
             this.AfficherDialogeDifficulte();
         }
     }
