@@ -48,6 +48,9 @@ namespace JEUX_ESCARGOT
         private const int MAX_VIE = 5;
         int vieFamille = 5;
         int vieGrandParents = 5;
+        
+        //Bouton quitter dans le menu (init ici car méthode de génération différente de celle des boutons de difficulté)
+        private Button boutonQuitter;
 
         // Tableaux contenant les adresses des images pour pouvoir les faire varier lors des spawn
         System.Windows.Media.ImageSource[] tabSalades = new System.Windows.Media.ImageSource[]
@@ -155,10 +158,19 @@ namespace JEUX_ESCARGOT
                     DefinirVitesse(difficulteCourante); // Défini la difficulté
                     fenetreDialogue.Close(); // Ferme le menu
                 };
-
                 panneau.Children.Add(boutonDifficulte);
             }
 
+            boutonQuitter = new Button
+            {
+                Content = "Quitter",
+                Width = 200,
+                Height = 50,
+                Margin = new Thickness(0, 10, 0, 0)
+            };
+            boutonQuitter.Click += BoutonQuitter_Click;
+
+            panneau.Children.Add(boutonQuitter);
             fenetreDialogue.Content = panneau;
             fenetreDialogue.ShowDialog();
         }
@@ -295,6 +307,11 @@ namespace JEUX_ESCARGOT
         {
             sonDeFond.Position = TimeSpan.Zero;
             sonDeFond.Play();
+        }
+
+        private void BoutonQuitter_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
 
         private void Fenetre_ToucheLevee(object sender, KeyEventArgs e)
@@ -682,7 +699,7 @@ namespace JEUX_ESCARGOT
             vieGrandParentsTimer.Stop();
             InitDebut();
             sonDeFond.Stop();
-            MessageBox.Show("Game Over");
+            MessageBox.Show("Game Over","Fin de partie", MessageBoxButton.OK,MessageBoxImage.Error);
             this.AfficherDialogeDifficulte();
         }
     }
