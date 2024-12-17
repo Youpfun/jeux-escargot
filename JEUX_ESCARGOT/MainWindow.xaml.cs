@@ -305,7 +305,7 @@ namespace JEUX_ESCARGOT
         public static void InitMusique()
         {
             sonDeFond = new MediaPlayer();
-            sonDeFond.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/ressource/son/test.mp3"));
+            sonDeFond.Open(new Uri(AppDomain.CurrentDomain.BaseDirectory + "/ressource/son/sonDeFond.mp3"));
             sonDeFond.MediaEnded += RelanceMusique;
             sonDeFond.Volume = 1;
             sonDeFond.Play();
@@ -380,6 +380,8 @@ namespace JEUX_ESCARGOT
             }
             else if (e.Key == Key.E)
             {
+                SoundPlayer player = new SoundPlayer("ressource/son/easterEgg.wav");
+                player.Play();
                 easterEgg = true;
             }
         }
@@ -438,9 +440,6 @@ namespace JEUX_ESCARGOT
                 (int)souris.ActualHeight);
             if (easterEgg == false)
             {
-                MediaPlayer player = new MediaPlayer();
-                player.Open(new Uri("chemin/vers/votre/tonnerre.mp3", UriKind.Relative));
-                player.Play();
                 if (sourisRect.IntersectsWith(familleRect) || sourisRect.IntersectsWith(grandParentsRect))
                 {
                     Mort();
@@ -448,7 +447,6 @@ namespace JEUX_ESCARGOT
 
                 if (voitureRect.IntersectsWith(escargotRect) || voitureGaucheRect.IntersectsWith(escargotRect) || sourisRect.IntersectsWith(escargotRect))
                 {
-
                     barreDeVie--;
                     Canvas.SetLeft(escargot, 0);
                     if (barreDeVie == 2)
