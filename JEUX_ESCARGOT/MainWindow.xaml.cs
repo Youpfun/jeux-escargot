@@ -21,27 +21,35 @@ namespace JEUX_ESCARGOT
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int PAS_ESCARGOT = 10;
         private static BitmapImage escargotGauche;
         private static BitmapImage escargotDroit;
         private static BitmapImage escargotHaut;
         private static BitmapImage escargotBas;
+
+        //Initialisation des timers
         private static DispatcherTimer minuterie;
         private DispatcherTimer saladeTimer;
         private DispatcherTimer voitureTimer;
         private DispatcherTimer voitureGaucheTimer;
         private DispatcherTimer vieFamilleTimer;
         private DispatcherTimer vieGrandParentsTimer;
+
+        //Timers en attente
         private bool saladeEnAttente = false;
         private bool voitureEnAttente = false;
         private bool voitureGaucheEnAttente = false;
+
+        //Initialisation des randoms
         private static Random rnd = new Random();
         private static Random rndSalade = new Random();
         private static Random rndVoiture = new Random();
         private static Random rndVoitureGauche = new Random();
-        private static bool gauche, droite, haut, bas;
+
+        //Initialisation des variables/constantes
+        private static bool gauche, droite, haut, bas, easterEgg;
         private static MediaPlayer sonDeFond;
         private static readonly int VITESSE_SALADE = 5;
+        public int PAS_ESCARGOT = 10;
         private static int VITESSE_VOITURE = 5;
         private static int VITESSE_SOURIS = 1;
         int nbSalade = 0, barreDeVie = 3, score = 0;
@@ -62,6 +70,7 @@ namespace JEUX_ESCARGOT
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade5bg.png")),
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade6bg.png"))
         };
+
         System.Windows.Media.ImageSource[] tabVoitures = new System.Windows.Media.ImageSource[]
         {
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1.png")),
@@ -72,7 +81,6 @@ namespace JEUX_ESCARGOT
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1Retournee.png")),
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture3Retournee.png"))
         };
-
 
         //Permet de créer un type de donnée avec ses différentes valeurs possibles (ici : Facile, Moyen, Difficile)
         public enum Difficulte
@@ -332,13 +340,17 @@ namespace JEUX_ESCARGOT
             {
                 bas = false;
             }
+            else if (e.Key == Key.E)
+            {
+                easterEgg = false;
+            }
         }
 
         private void Fenetre_TouchePressee(object sender, KeyEventArgs e)
         {
-#if DEBUG
-            Console.WriteLine(e.Key);
-#endif
+/*#if DEBUG
+            Console.WriteLine(e.Key); // si besoin de debug si touche non detect
+#endif*/
             if (e.Key == Key.Right)
             {
                 droite = true;
@@ -365,6 +377,10 @@ namespace JEUX_ESCARGOT
             else if (e.Key == Key.Escape)
             {
                 BasculerMenuPause();
+            }
+            else if (e.Key == Key.E)
+            {
+                easterEgg = true;
             }
         }
 
@@ -420,27 +436,33 @@ namespace JEUX_ESCARGOT
                 (int)Canvas.GetTop(souris),
                 (int)souris.ActualWidth,
                 (int)souris.ActualHeight);
-
-            if (sourisRect.IntersectsWith(familleRect) || sourisRect.IntersectsWith(grandParentsRect))
+            if (easterEgg == false)
             {
-                Mort();
-            }
-
-            if (voitureRect.IntersectsWith(escargotRect) || voitureGaucheRect.IntersectsWith(escargotRect) || sourisRect.IntersectsWith(escargotRect))
-            {
-                barreDeVie--;
-                Canvas.SetLeft(escargot, 0);
-                if (barreDeVie == 2)
-                {
-                    vie3.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                else if (barreDeVie == 1)
-                {
-                    vie2.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                else //(barreDeVie == 0)
+                MediaPlayer player = new MediaPlayer();
+                player.Open(new Uri("chemin/vers/votre/tonnerre.mp3", UriKind.Relative));
+                player.Play();
+                if (sourisRect.IntersectsWith(familleRect) || sourisRect.IntersectsWith(grandParentsRect))
                 {
                     Mort();
+                }
+
+                if (voitureRect.IntersectsWith(escargotRect) || voitureGaucheRect.IntersectsWith(escargotRect) || sourisRect.IntersectsWith(escargotRect))
+                {
+
+                    barreDeVie--;
+                    Canvas.SetLeft(escargot, 0);
+                    if (barreDeVie == 2)
+                    {
+                        vie3.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                    else if (barreDeVie == 1)
+                    {
+                        vie2.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                    else //(barreDeVie == 0)
+                    {
+                        Mort();
+                    }
                 }
             }
 
@@ -450,12 +472,6 @@ namespace JEUX_ESCARGOT
                 Canvas.SetTop(imageSaladeGauche, 0 - imageSaladeGauche.ActualHeight);
                 ReaparitionSalad();
             }
-
-            if (sourisRect.IntersectsWith(voitureRect) || sourisRect.IntersectsWith(voitureGaucheRect))
-            {
-
-            }
-
             if (escargotRect.IntersectsWith(familleRect))
             {
                 DonnerSaladesAFamille();
@@ -477,15 +493,15 @@ namespace JEUX_ESCARGOT
             {
                 escargot.Source = escargotDroit;
                 Canvas.SetLeft(escargot, Canvas.GetLeft(escargot) + PAS_ESCARGOT);
-                if (Canvas.GetLeft(escargot) > this.ActualWidth - escargotRect.Width)
-                    Canvas.SetLeft(escargot, this.ActualWidth - escargotRect.Width);
+                if (Canvas.GetLeft(escargot) > 1300 - escargotRect.Width)
+                    Canvas.SetLeft(escargot, 1300 - escargotRect.Width);
             }
             if (bas)
             {
                 escargot.Source = escargotBas;
                 Canvas.SetTop(escargot, Canvas.GetTop(escargot) + PAS_ESCARGOT);
-                if (Canvas.GetTop(escargot) > this.ActualHeight - escargotRect.Height - PAS_ESCARGOT)
-                    Canvas.SetTop(escargot, this.ActualHeight - escargotRect.Height - PAS_ESCARGOT);
+                if (Canvas.GetTop(escargot) > 700 - escargotRect.Height)
+                    Canvas.SetTop(escargot, 700 - escargotRect.Height);
             }
             if (haut)
             {
@@ -663,7 +679,6 @@ namespace JEUX_ESCARGOT
 
         private void DonnerSaladesAuxGrandParents()
         {
-            Console.WriteLine(vieGrandParents);
             vieGrandParents = Math.Min(vieGrandParents + nbSalade, MAX_VIE);
             pbGrandParents.Value = vieGrandParents;
             nbSalade = 0;
