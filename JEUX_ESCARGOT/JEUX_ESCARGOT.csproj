@@ -9,8 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ressource\img\escargot-bas.png" />
     <None Remove="ressource\img\escargot-droit.png" />
     <None Remove="ressource\img\escargot-gauche.png" />
+    <None Remove="ressource\img\escargot-haut.png" />
     <None Remove="ressource\img\famille_escargot.png" />
     <None Remove="ressource\img\grenouille_droite.png" />
     <None Remove="ressource\img\grenouille_gauche.png" />
@@ -34,10 +36,16 @@
     <Resource Include="ressource\img\coeur.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="ressource\img\escargot-bas.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="ressource\img\escargot-droit.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\escargot-gauche.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\escargot-haut.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\famille_escargot.png">

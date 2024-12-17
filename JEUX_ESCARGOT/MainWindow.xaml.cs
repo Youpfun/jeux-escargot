@@ -24,6 +24,8 @@ namespace JEUX_ESCARGOT
         public int PAS_ESCARGOT = 10;
         private static BitmapImage escargotGauche;
         private static BitmapImage escargotDroit;
+        private static BitmapImage escargotHaut;
+        private static BitmapImage escargotBas;
         private static DispatcherTimer minuterie;
         private DispatcherTimer saladeTimer;
         private DispatcherTimer voitureTimer;
@@ -46,7 +48,7 @@ namespace JEUX_ESCARGOT
         private const int MAX_VIE = 5;
         int vieFamille = 5;
         int vieGrandParents = 5;
-        
+
         // Tableaux contenant les adresses des images pour pouvoir les faire varier lors des spawn
         System.Windows.Media.ImageSource[] tabSalades = new System.Windows.Media.ImageSource[]
         {
@@ -56,7 +58,7 @@ namespace JEUX_ESCARGOT
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade4bg.png")),
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade5bg.png")),
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/salade6bg.png"))
-        };
+        };  
         System.Windows.Media.ImageSource[] tabVoitures = new System.Windows.Media.ImageSource[]
         {
             new BitmapImage(new Uri("pack://application:,,,/ressource/img/voiture1.png")),
@@ -252,6 +254,8 @@ namespace JEUX_ESCARGOT
         {
             escargotDroit = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-droit.png"));
             escargotGauche = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-gauche.png"));
+            escargotHaut = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-haut.png"));
+            escargotBas = new BitmapImage(new Uri("pack://application:,,,/ressource/img/escargot-bas.png"));
             escargot.Source = escargotDroit;
         }
 
@@ -388,8 +392,7 @@ namespace JEUX_ESCARGOT
 
             if (sourisRect.IntersectsWith(familleRect) || sourisRect.IntersectsWith(grandParentsRect))
             {
-                MessageBox.Show("Game Over");
-                this.Close();
+                Mort();
             }
 
             if (voitureRect.IntersectsWith(escargotRect) || voitureGaucheRect.IntersectsWith(escargotRect) || sourisRect.IntersectsWith(escargotRect))
@@ -406,8 +409,7 @@ namespace JEUX_ESCARGOT
                 }
                 else //(barreDeVie == 0)
                 {
-                    MessageBox.Show("Game Over");
-                    this.Close();
+                    Mort();
                 }
             }
 
@@ -449,12 +451,14 @@ namespace JEUX_ESCARGOT
             }
             if (bas)
             {
+                escargot.Source = escargotBas;
                 Canvas.SetTop(escargot, Canvas.GetTop(escargot) + PAS_ESCARGOT);
                 if (Canvas.GetTop(escargot) > this.ActualHeight - escargotRect.Height + PAS_ESCARGOT)
                     Canvas.SetTop(escargot, this.ActualHeight - escargotRect.Height + PAS_ESCARGOT);
             }
             if (haut)
             {
+                escargot.Source = escargotHaut;
                 Canvas.SetTop(escargot, Canvas.GetTop(escargot) - PAS_ESCARGOT);
                 if (Canvas.GetTop(escargot) < 0)
                     Canvas.SetTop(escargot, 0);
@@ -635,8 +639,7 @@ namespace JEUX_ESCARGOT
 
             if (vieFamille == 0)
             {
-                MessageBox.Show("Game Over");
-                this.Close();
+                Mort();
             }
         }
 
@@ -649,9 +652,16 @@ namespace JEUX_ESCARGOT
 
             if (vieGrandParents == 0)
             {
-                MessageBox.Show("Game Over");
-                this.Close();
+                Mort();
             }
+        }
+        private void Mort()
+        {
+            minuterie.Stop();
+            vieFamilleTimer.Stop();
+            vieGrandParentsTimer.Stop();
+            MessageBox.Show("Game Over");
+            this.Close();
         }
     }
 }
