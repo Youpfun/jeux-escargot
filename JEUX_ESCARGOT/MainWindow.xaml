@@ -197,8 +197,11 @@
                 Stretch="Fill" />
         </Canvas>
 
-        <!--  Menu de pause  -->
-        <Grid x:Name="PauseMenu" Visibility="Collapsed">
+        <!--
+            Menu de pause
+            Visibility="Collapsed"
+        -->
+        <Grid x:Name="PauseMenu">
             <Border
                 Width="600"
                 Height="450"
