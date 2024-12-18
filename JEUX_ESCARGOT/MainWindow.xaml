@@ -201,7 +201,10 @@
         <!--
             Menu de pause
         -->
-        <Grid x:Name="PauseMenu" Visibility="Collapsed" Cursor="">
+        <Grid
+            x:Name="PauseMenu"
+            Cursor=""
+            Visibility="Collapsed">
             <Border
                 Width="600"
                 Height="450"
@@ -237,7 +240,7 @@
                         Content="Son"
                         Cursor="Hand" />
 
-                    <!--  New sound settings grid, initially hidden  -->
+                    <!--  Grille pour les paramètres son, initialisée cachée  -->
                     <Grid x:Name="SoundSettingsGrid" Visibility="Collapsed">
                         <StackPanel>
                             <TextBlock

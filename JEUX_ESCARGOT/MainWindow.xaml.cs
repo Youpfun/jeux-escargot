@@ -16,11 +16,11 @@ using System;
 
 namespace JEUX_ESCARGOT
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    
     public partial class MainWindow : Window
     {
+        
+        //Initialisation des images pour l'escargot qu'on utilisera selon la direction prise
         private static BitmapImage escargotGauche;
         private static BitmapImage escargotDroit;
         private static BitmapImage escargotHaut;
@@ -617,22 +617,22 @@ namespace JEUX_ESCARGOT
 
         private void BoutonSon_Clic(object sender, RoutedEventArgs e)
         {
-            // Hide main pause menu buttons
+            // Cache les autres boutons du menu
             SonBoutton.Visibility = Visibility.Collapsed;
             ReglesBoutton.Visibility = Visibility.Collapsed;
             ReprendreBoutton.Visibility = Visibility.Collapsed;
             DifficulteBoutton.Visibility = Visibility.Collapsed;
             QuitterBoutton.Visibility = Visibility.Collapsed;
 
-            // Show sound settings grid
+            // Rend visible la grille qui gère les paramètres son
             SoundSettingsGrid.Visibility = Visibility.Visible;
 
-            // Set slider to current volume
+            // Met le slider au niveau du son actuel
             VolumeSlider.Value = sonDeFond.Volume;
         }
         private void VolumeSlider_ValeurChange(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Update background music volume
+            // Met à jour le volume du son
             if (sonDeFond != null)
             {
                 sonDeFond.Volume = VolumeSlider.Value;
@@ -641,10 +641,10 @@ namespace JEUX_ESCARGOT
 
         private void BoutonRetourParametresSon_Clic(object sender, RoutedEventArgs e)
         {
-            // Hide sound settings grid
+            // Cache la grille qui gère les paramètres son
             SoundSettingsGrid.Visibility = Visibility.Collapsed;
 
-            // Restore main pause menu buttons
+            // Remets les autres boutons visibles
             SonBoutton.Visibility = Visibility.Visible;
             ReglesBoutton.Visibility = Visibility.Visible;
             ReprendreBoutton.Visibility = Visibility.Visible;
