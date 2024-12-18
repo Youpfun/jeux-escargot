@@ -122,6 +122,7 @@ namespace JEUX_ESCARGOT
                 Title = "Choisissez la difficulté",
                 Width = 718,
                 Height = 400,
+                Icon = new BitmapImage(new Uri("pack://application:,,,/ressource/img/logo.ico")),
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 ResizeMode = ResizeMode.NoResize,
                 Background = new ImageBrush

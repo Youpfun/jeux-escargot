@@ -16,6 +16,7 @@
     <None Remove="ressource\img\famille_escargot.png" />
     <None Remove="ressource\img\grenouille_droite.png" />
     <None Remove="ressource\img\grenouille_gauche.png" />
+    <None Remove="ressource\img\logo.ico" />
     <None Remove="ressource\img\menu.png" />
     <None Remove="ressource\img\route.png" />
     <None Remove="ressource\img\salade1bg.png" />
@@ -52,6 +53,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\gp_escargot.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="ressource\img\logo.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="ressource\img\menu.png">

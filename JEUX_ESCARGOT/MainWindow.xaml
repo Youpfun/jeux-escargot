@@ -8,6 +8,7 @@
     Title="Nourri ta famille"
     Width="1317"
     Height="734"
+    Icon="/ressource/img/logo.ico"
     KeyDown="Fenetre_TouchePressee"
     KeyUp="Fenetre_ToucheLevee"
     ResizeMode="NoResize"
