@@ -345,10 +345,6 @@ namespace JEUX_ESCARGOT
                 case Key.E:
                     easterEgg = false;
                     break;
-
-/*                default:
-                    // Optionnel : vous pouvez ajouter un comportement par défaut si nécessaire
-                    break;*/
             }
         }
 
@@ -393,10 +389,6 @@ namespace JEUX_ESCARGOT
                     player.Play();
                     easterEgg = true;
                     break;
-
-/*                default:
-                    // Vous pouvez ajouter un cas par défaut si vous souhaitez gérer des touches non traitées.
-                    break;*/
             }
         }
 
@@ -698,6 +690,7 @@ namespace JEUX_ESCARGOT
 
         private void DiminuerVieFamille(object? sender, EventArgs e)
         {
+            //Console.WriteLine("La vie de la famille est de : " + vieFamille);
             vieFamille = Math.Max(vieFamille - 1, 0);
             pbFamille.Value = vieFamille;
             score += 1;
@@ -711,6 +704,7 @@ namespace JEUX_ESCARGOT
 
         private void DiminuerVieGrandParents(object? sender, EventArgs e)
         {
+            //Console.WriteLine("La vie des grands parents est de : " + vieGrandParents);
             vieGrandParents = Math.Max(vieGrandParents - 1, 0);
             pbGrandParents.Value = vieGrandParents;
             score += 1;
