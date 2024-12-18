@@ -373,14 +373,6 @@ namespace JEUX_ESCARGOT
                 case Key.Down:
                     bas = true;
                     break;
-
-                case Key.Space:
-                    if (minuterie.IsEnabled)
-                        minuterie.Stop();
-                    else
-                        minuterie.Start();
-                    break;
-
                 case Key.Escape:
                     BasculerMenuPause();
                     break;
