@@ -324,65 +324,79 @@ namespace JEUX_ESCARGOT
 
         private void Fenetre_ToucheLevee(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Right)
+            switch (e.Key)
             {
-                droite = false;
-            }
-            else if (e.Key == Key.Left)
-            {
-                gauche = false;
-            }
-            else if (e.Key == Key.Up)
-            {
-                haut = false;
-            }
-            else if (e.Key == Key.Down)
-            {
-                bas = false;
-            }
-            else if (e.Key == Key.E)
-            {
-                easterEgg = false;
+                case Key.Right:
+                    droite = false;
+                    break;
+
+                case Key.Left:
+                    gauche = false;
+                    break;
+
+                case Key.Up:
+                    haut = false;
+                    break;
+
+                case Key.Down:
+                    bas = false;
+                    break;
+
+                case Key.E:
+                    easterEgg = false;
+                    break;
+
+/*                default:
+                    // Optionnel : vous pouvez ajouter un comportement par défaut si nécessaire
+                    break;*/
             }
         }
+
 
         private void Fenetre_TouchePressee(object sender, KeyEventArgs e)
         {
             /*#if DEBUG
                         Console.WriteLine(e.Key); // si besoin de debug si touche non detect
             #endif*/
-            if (e.Key == Key.Right)
+
+            switch (e.Key)
             {
-                droite = true;
-            }
-            else if (e.Key == Key.Left)
-            {
-                gauche = true;
-            }
-            else if (e.Key == Key.Up)
-            {
-                haut = true;
-            }
-            else if (e.Key == Key.Down)
-            {
-                bas = true;
-            }
-            else if (e.Key == Key.Space)
-            {
-                if (minuterie.IsEnabled)
-                    minuterie.Stop();
-                else
-                    minuterie.Start();
-            }
-            else if (e.Key == Key.Escape)
-            {
-                BasculerMenuPause();
-            }
-            else if (e.Key == Key.E)
-            {
-                SoundPlayer player = new SoundPlayer("ressource/son/easterEgg.wav");
-                player.Play();
-                easterEgg = true;
+                case Key.Right:
+                    droite = true;
+                    break;
+
+                case Key.Left:
+                    gauche = true;
+                    break;
+
+                case Key.Up:
+                    haut = true;
+                    break;
+
+                case Key.Down:
+                    bas = true;
+                    break;
+
+                case Key.Space:
+                    if (minuterie.IsEnabled)
+                        minuterie.Stop();
+                    else
+                        minuterie.Start();
+                    break;
+
+                case Key.Escape:
+                    BasculerMenuPause();
+                    break;
+
+                case Key.E:
+                    SoundPlayer player = new SoundPlayer("ressource/son/easterEgg.wav");
+                    player.Play();
+                    easterEgg = true;
+                    break;
+
+/*                default:
+                    // Vous pouvez ajouter un cas par défaut si vous souhaitez gérer des touches non traitées.
+                    break;*/
             }
         }
 
