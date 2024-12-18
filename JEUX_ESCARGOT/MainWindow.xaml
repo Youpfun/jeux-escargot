@@ -150,10 +150,11 @@
                 Stretch="Fill" />
             <Border
                 x:Name="route"
-                Canvas.Left="247"
+                Canvas.Left="252"
+                Canvas.Top="-51"
                 Width="820"
                 Height="718"
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 BorderThickness="1" />
             <Border
@@ -199,9 +200,8 @@
 
         <!--
             Menu de pause
-            Visibility="Collapsed"
         -->
-        <Grid x:Name="PauseMenu">
+        <Grid x:Name="PauseMenu" Visibility="Collapsed" Cursor="">
             <Border
                 Width="600"
                 Height="450"
@@ -223,15 +223,19 @@
                         Width="200"
                         Height="50"
                         Margin="0,10"
+                        Background="#4CAF50"
                         Click="BoutonReprendre_Clic"
-                        Content="Reprendre" />
+                        Content="Reprendre"
+                        Cursor="Hand" />
                     <Button
                         x:Name="SonBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"
+                        Background="#FFDCCA0B"
                         Click="BoutonSon_Clic"
-                        Content="Son" />
+                        Content="Son"
+                        Cursor="Hand" />
 
                     <!--  New sound settings grid, initially hidden  -->
                     <Grid x:Name="SoundSettingsGrid" Visibility="Collapsed">
@@ -254,8 +258,10 @@
                                 Width="200"
                                 Height="50"
                                 Margin="0,20"
+                                Background="#4CAF50"
                                 Click="BoutonRetourParametresSon_Clic"
-                                Content="Retour" />
+                                Content="Retour"
+                                Cursor="Hand" />
                         </StackPanel>
                     </Grid>
                     <Button
@@ -263,22 +269,29 @@
                         Width="200"
                         Height="50"
                         Margin="0,10"
+                        Background="#FF04B4FF"
                         Click="BoutonRegles_Clic"
-                        Content="Règles du jeu" />
+                        Content="Règles du jeu"
+                        Cursor="Hand" />
                     <Button
                         x:Name="DifficulteBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"
+                        Background="#FFE816FF"
+                        BorderThickness="2"
                         Click="DifficulteBoutton_Clic"
-                        Content="Changer de difficulté" />
+                        Content="Changer de difficulté"
+                        Cursor="Hand" />
                     <Button
                         x:Name="QuitterBoutton"
                         Width="200"
                         Height="50"
                         Margin="0,10"
+                        Background="#FFDE1F1F"
                         Click="BoutonQuitter_Click"
-                        Content="Quitter" />
+                        Content="Quitter"
+                        Cursor="Hand" />
                 </StackPanel>
             </Border>
         </Grid>
